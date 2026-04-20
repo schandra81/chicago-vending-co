@@ -1,0 +1,125 @@
+---
+const services = [
+  {
+    icon: "🥤",
+    title: "Snack & Beverage",
+    desc: "200+ SKUs. Chips, candy, water, soda, energy drinks. Name brands your team actually wants.",
+    tag: "Most Popular",
+  },
+  {
+    icon: "🥗",
+    title: "Healthy & Organic",
+    desc: "KIND bars, Rx Bars, kombucha, sparkling water, nuts. Perfect for wellness-focused offices.",
+    tag: null,
+  },
+  {
+    icon: "☕",
+    title: "Coffee & Hot Drinks",
+    desc: "Bean-to-cup machines. Espresso, lattes, cappuccinos. Fresh-ground every cup.",
+    tag: "Premium",
+  },
+  {
+    icon: "🏪",
+    title: "Micro-Markets",
+    desc: "Open-format grab-and-go market. Fresh food, salads, sandwiches. No attendant needed.",
+    tag: "New",
+  },
+];
+---
+
+<section class="services-section" id="services">
+  <div class="container">
+    <div class="section-label">What We Offer</div>
+    <h2 class="section-title">Four ways to feed<br><span class="accent">your Chicago team</span></h2>
+    <p class="section-sub">Every machine is free to install, stocked weekly, and serviced within 4 hours—guaranteed.</p>
+
+    <div class="services-grid">
+      {services.map((s) => (
+        <div class="service-card">
+          {s.tag && <div class="service-tag">{s.tag}</div>}
+          <div class="service-icon">{s.icon}</div>
+          <h3 class="service-title">{s.title}</h3>
+          <p class="service-desc">{s.desc}</p>
+          <a href="#quiz" class="service-link">Get this service →</a>
+        </div>
+      ))}
+    </div>
+
+    <div class="services-guarantee">
+      <div class="guarantee-inner">
+        <div class="guarantee-icon">🛡️</div>
+        <div>
+          <strong>Chicago Service Guarantee</strong>
+          <p>Machine down? We're on-site within 4 hours or your next month is free. No excuses—we're Chicago-based.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .services-section {
+    padding: 100px 0;
+    background: var(--c-near-black);
+  }
+  .section-label {
+    font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--c-orange); font-weight: 500; margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: 400; margin-bottom: 16px;
+  }
+  .accent { color: var(--c-orange); }
+  .section-sub {
+    font-size: 17px; color: rgba(248,245,240,0.6);
+    max-width: 520px; margin-bottom: 60px;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px; margin-bottom: 40px;
+  }
+  .service-card {
+    background: var(--c-dark);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+    position: relative;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .service-card:hover {
+    border-color: rgba(255,78,0,0.3);
+    transform: translateY(-4px);
+  }
+  .service-tag {
+    position: absolute; top: 20px; right: 20px;
+    background: rgba(255,78,0,0.15); color: var(--c-orange-light);
+    font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
+    padding: 4px 10px; border-radius: 100px;
+    border: 1px solid rgba(255,78,0,0.25);
+  }
+  .service-icon { font-size: 36px; margin-bottom: 20px; }
+  .service-title {
+    font-size: 20px; font-weight: 500; margin-bottom: 12px;
+  }
+  .service-desc { font-size: 15px; color: rgba(248,245,240,0.6); line-height: 1.6; margin-bottom: 24px; }
+  .service-link {
+    font-size: 14px; color: var(--c-orange);
+    font-weight: 500; transition: gap 0.2s;
+    display: inline-flex; align-items: center;
+  }
+  .service-link:hover { opacity: 0.8; }
+  .services-guarantee {
+    background: rgba(255,78,0,0.06);
+    border: 1px solid rgba(255,78,0,0.2);
+    border-radius: var(--radius-lg); padding: 28px 32px;
+  }
+  .guarantee-inner {
+    display: flex; gap: 20px; align-items: flex-start;
+  }
+  .guarantee-icon { font-size: 28px; flex-shrink: 0; }
+  .guarantee-inner strong { font-size: 16px; font-weight: 500; display: block; margin-bottom: 6px; }
+  .guarantee-inner p { font-size: 15px; color: rgba(248,245,240,0.65); }
+</style>

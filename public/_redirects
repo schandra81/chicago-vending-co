@@ -1,0 +1,21 @@
+# Canonical URL enforcement — redirect www to non-www
+# (Vercel handles this in vercel.json, but this catches edge cases)
+
+# Force HTTPS trailing slash removal for clean canonicals
+/blog/ /blog 301
+/locations/ /locations 301
+/about/ /about 301
+/contact/ /contact 301
+/privacy/ /privacy 301
+/terms/ /terms 301
+
+# Old URL compatibility (in case you had a previous site)
+/vending-machines-chicago /locations/chicago-loop 301
+/chicago-loop-vending /locations/chicago-loop 301
+/naperville-vending-machines /locations/naperville-vending 301
+/schaumburg-vending-machines /locations/schaumburg-vending 301
+/evanston-vending /locations/evanston-vending 301
+/office-vending /industries/office-building-vending 301
+/gym-vending /industries/gym-fitness-vending 301
+/school-vending /industries/school-university-vending 301
+/hospital-vending /industries/hospital-healthcare-vending 301

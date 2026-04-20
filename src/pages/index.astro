@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import Quiz from '../components/Quiz.astro';
+import Reviews from '../components/Reviews.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+import ConversionTools from '../components/ConversionTools.astro';
+---
+
+<Base
+  title="Chicago Vending Co. | Free Vending Machines for Chicago Businesses"
+  description="Chicago's #1 vending machine provider. Free installation, 24/7 service, healthy & snack options. Serving Loop, River North, Wicker Park, Naperville & all Chicago metro offices, schools & gyms. Get a free quote today."
+  schemaType="homepage"
+  canonical="https://chicagovendingco.com"
+>
+  <Nav />
+  <main>
+    <Hero />
+    <Services />
+    <HowItWorks />
+    <Quiz />
+    <Reviews />
+    <FAQ />
+  </main>
+  <Footer />
+  <ConversionTools />
+</Base>

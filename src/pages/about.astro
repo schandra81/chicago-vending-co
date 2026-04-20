@@ -1,0 +1,193 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const team = [
+  { name: "Marco DiSalvo", role: "Founder & CEO", since: "Chicago since 2012", initials: "MD", bio: "Born and raised in Bridgeport, Marco started Chicago Vending Co. after 8 years in commercial real estate management. He saw firsthand how poor break room service hurt tenant satisfaction — and decided to fix it." },
+  { name: "Priya Nair", role: "Head of Operations", since: "Joined 2015", initials: "PN", bio: "Priya runs a team of 18 Chicago-based service technicians and 4 account managers. Her obsession: no machine goes unserviced for more than 4 hours." },
+  { name: "James Kowalski", role: "Head of Sales", since: "Joined 2017", initials: "JK", bio: "James grew up in Schaumburg and has spent his career in Chicago B2B services. His rule: never oversell, always deliver. 94% of his accounts renew every year." },
+  { name: "Amara Osei", role: "Product & Nutrition Lead", since: "Joined 2019", initials: "AO", bio: "Amara manages our product catalog of 200+ SKUs. She's responsible for making sure our machines carry what Chicago employees actually want — not just what's easy to stock." },
+];
+
+const milestones = [
+  { year: "2012", event: "Founded in Chicago's River North neighborhood with 8 machines across 3 locations" },
+  { year: "2015", event: "Expanded to 50+ locations. Added healthy vending category after client demand" },
+  { year: "2017", event: "Launched cashless payment across entire fleet — one of the first in Chicago to do so" },
+  { year: "2019", event: "Introduced micro-market installations for large Chicago campuses" },
+  { year: "2021", event: "Launched remote machine monitoring system — predicting issues before they happen" },
+  { year: "2023", event: "Reached 300 Chicago locations and expanded to all suburbs within 50 miles" },
+  { year: "2025", event: "400+ active locations, 18-person service team, 4.9★ Google rating" },
+];
+---
+
+<Base
+  title="About Chicago Vending Co. | Chicago's Most Trusted Vending Company"
+  description="Chicago Vending Co. was founded in 2012 to bring reliable, modern vending to Chicago businesses. Meet our team and learn our story."
+  canonical="https://chicagovendingco.com/about"
+>
+  <Nav />
+  <main>
+
+    <!-- Hero -->
+    <section class="about-hero">
+      <div class="container">
+        <div class="about-label">Our Story</div>
+        <h1 class="about-title">Chicago-built.<br><span class="accent">Chicago-obsessed.</span></h1>
+        <p class="about-sub">We started Chicago Vending Co. in 2012 because we were frustrated with the vending industry — outdated machines, unreliable service, and companies that treated Chicago businesses like afterthoughts. We built the company we wished existed.</p>
+      </div>
+    </section>
+
+    <!-- Mission strip -->
+    <section class="mission-strip">
+      <div class="container mission-grid">
+        <div class="mission-item">
+          <div class="mi-icon">🏙️</div>
+          <h3>Chicago First</h3>
+          <p>We're headquartered here. Our service team lives here. When you call, you get someone who knows the Loop from Schaumburg.</p>
+        </div>
+        <div class="mission-item">
+          <div class="mi-icon">🛡️</div>
+          <h3>Service Obsessed</h3>
+          <p>Our 4-hour response guarantee isn't a marketing line. We've built our entire operations model around hitting it every single time.</p>
+        </div>
+        <div class="mission-item">
+          <div class="mi-icon">🤝</div>
+          <h3>No Pressure, Ever</h3>
+          <p>We've grown entirely through referrals and reputation. We don't cold-call, we don't oversell, and we don't lock you into contracts you don't need.</p>
+        </div>
+        <div class="mission-item">
+          <div class="mi-icon">🌱</div>
+          <h3>Better for Everyone</h3>
+          <p>Better products, better machines, better service. Vending in Chicago doesn't have to mean settling for the cheapest option.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="about-stats">
+      <div class="container">
+        <div class="about-stats-grid">
+          <div class="as-item"><strong>400+</strong><span>Active Chicago locations</span></div>
+          <div class="as-divider"></div>
+          <div class="as-item"><strong>13 yrs</strong><span>Serving Chicago</span></div>
+          <div class="as-divider"></div>
+          <div class="as-item"><strong>18</strong><span>Chicago-based technicians</span></div>
+          <div class="as-divider"></div>
+          <div class="as-item"><strong>4.9★</strong><span>Google rating (127 reviews)</span></div>
+          <div class="as-divider"></div>
+          <div class="as-item"><strong>98%</strong><span>Machine uptime across fleet</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team-section">
+      <div class="container">
+        <div class="section-label">The Team</div>
+        <h2 class="section-title">The people behind<br><span class="accent">every machine</span></h2>
+        <div class="team-grid">
+          {team.map(member => (
+            <div class="team-card">
+              <div class="team-avatar">{member.initials}</div>
+              <div class="team-info">
+                <strong class="team-name">{member.name}</strong>
+                <span class="team-role">{member.role}</span>
+                <span class="team-since">{member.since}</span>
+                <p class="team-bio">{member.bio}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="timeline-section">
+      <div class="container">
+        <div class="section-label">History</div>
+        <h2 class="section-title">13 years of serving<br><span class="accent">Chicago businesses</span></h2>
+        <div class="timeline">
+          {milestones.map((m, i) => (
+            <div class="timeline-item">
+              <div class="tl-year">{m.year}</div>
+              <div class="tl-dot"></div>
+              <div class="tl-content">{m.event}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="about-cta">
+      <div class="container about-cta-inner">
+        <h2>Ready to work with us?</h2>
+        <p>Join 400+ Chicago businesses who trust us with their break rooms. Free installation, free service, and a team that actually picks up the phone.</p>
+        <div class="about-cta-btns">
+          <a href="/#quiz" class="btn-primary">Check If You Qualify →</a>
+          <a href="/contact" class="btn-ghost">Contact Our Team</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .about-hero{padding:140px 0 80px;background:var(--c-near-black);border-bottom:1px solid var(--c-border)}
+  .about-label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--c-orange);font-weight:500;margin-bottom:16px}
+  .about-title{font-family:var(--font-display);font-size:clamp(56px,10vw,120px);font-weight:400;line-height:1.05;margin-bottom:20px}
+  .accent{color:var(--c-orange)}
+  .about-sub{font-size:18px;color:rgba(248,245,240,.65);max-width:580px;line-height:1.7}
+
+  .mission-strip{padding:80px 0;background:var(--c-black)}
+  .mission-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .mission-item{padding:32px 24px;background:var(--c-dark);border:1px solid var(--c-border);border-radius:var(--radius-lg)}
+  .mi-icon{font-size:32px;margin-bottom:16px}
+  .mission-item h3{font-size:18px;font-weight:500;margin-bottom:10px}
+  .mission-item p{font-size:14px;color:rgba(248,245,240,.6);line-height:1.65}
+
+  .about-stats{padding:64px 0;background:var(--c-dark);border-top:1px solid var(--c-border);border-bottom:1px solid var(--c-border)}
+  .about-stats-grid{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px}
+  .as-item{display:flex;flex-direction:column;gap:4px;align-items:center;text-align:center}
+  .as-item strong{font-family:var(--font-display);font-size:clamp(36px,5vw,64px);color:var(--c-orange);line-height:1}
+  .as-item span{font-size:13px;color:rgba(248,245,240,.5)}
+  .as-divider{width:1px;height:60px;background:var(--c-border)}
+
+  .section-label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--c-orange);font-weight:500;margin-bottom:16px}
+  .section-title{font-family:var(--font-display);font-size:clamp(40px,6vw,72px);font-weight:400;margin-bottom:48px}
+
+  .team-section{padding:100px 0;background:var(--c-near-black)}
+  .team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+  .team-card{display:flex;gap:20px;background:var(--c-dark);border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:28px}
+  .team-avatar{width:56px;height:56px;border-radius:50%;background:rgba(255,78,0,.15);color:var(--c-orange);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:500;flex-shrink:0}
+  .team-info{display:flex;flex-direction:column;gap:3px}
+  .team-name{font-size:17px;font-weight:500}
+  .team-role{font-size:13px;color:var(--c-orange)}
+  .team-since{font-size:12px;color:rgba(248,245,240,.4);margin-bottom:8px}
+  .team-bio{font-size:14px;color:rgba(248,245,240,.6);line-height:1.65}
+
+  .timeline-section{padding:100px 0;background:var(--c-black)}
+  .timeline{display:flex;flex-direction:column;gap:0;max-width:720px}
+  .timeline-item{display:grid;grid-template-columns:80px 32px 1fr;gap:0 16px;align-items:start;padding-bottom:32px;position:relative}
+  .timeline-item:last-child{padding-bottom:0}
+  .timeline-item:not(:last-child)::after{content:'';position:absolute;left:calc(80px + 16px + 15px);top:32px;bottom:0;width:2px;background:var(--c-border)}
+  .tl-year{font-family:var(--font-display);font-size:22px;color:var(--c-orange);padding-top:2px;text-align:right}
+  .tl-dot{width:12px;height:12px;border-radius:50%;background:var(--c-orange);margin-top:6px;flex-shrink:0;position:relative;z-index:1;justify-self:center}
+  .tl-content{font-size:15px;color:rgba(248,245,240,.75);line-height:1.65;padding-top:2px}
+
+  .about-cta{padding:100px 0;background:var(--c-near-black);border-top:1px solid var(--c-border)}
+  .about-cta-inner{text-align:center;max-width:640px;margin:0 auto}
+  .about-cta h2{font-family:var(--font-display);font-size:clamp(40px,7vw,80px);font-weight:400;margin-bottom:16px}
+  .about-cta p{font-size:17px;color:rgba(248,245,240,.65);line-height:1.7;margin-bottom:36px}
+  .about-cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--c-orange);color:#fff;padding:16px 28px;border-radius:var(--radius);font-size:16px;font-weight:500;transition:background .2s,transform .15s}
+  .btn-primary:hover{background:var(--c-orange-dark);transform:translateY(-1px)}
+  .btn-ghost{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(248,245,240,.2);color:rgba(248,245,240,.8);padding:16px 24px;border-radius:var(--radius);font-size:16px;transition:border-color .2s}
+  .btn-ghost:hover{border-color:rgba(248,245,240,.5)}
+
+  @media(max-width:900px){.mission-grid{grid-template-columns:1fr 1fr}.team-grid{grid-template-columns:1fr}.as-divider{display:none}.about-stats-grid{justify-content:center}}
+  @media(max-width:600px){.mission-grid{grid-template-columns:1fr}.about-cta-btns{flex-direction:column}.timeline-item{grid-template-columns:60px 24px 1fr}}
+</style>

@@ -1,0 +1,135 @@
+---
+---
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="logo">
+          <span class="logo-icon">◈</span>
+          <span>Chicago<strong>Vending</strong></span>
+        </a>
+        <p class="footer-tagline">Chicago's most trusted vending partner. Free installation. Zero hassle.</p>
+        <div class="footer-contact">
+          <a href="tel:+13125550190">📞 (312) 555-0190</a>
+          <a href="mailto:hello@chicagovendingco.com">✉️ hello@chicagovendingco.com</a>
+          <span>📍 350 N Orleans St, Chicago, IL 60654</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Snack & Beverage Vending</a></li>
+          <li><a href="#services">Healthy Vending Chicago</a></li>
+          <li><a href="#services">Office Coffee Service</a></li>
+          <li><a href="#services">Micro-Markets Chicago</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Service Areas</h4>
+        <ul>
+          <li><a href="/locations/chicago-loop">Chicago Loop Vending</a></li>
+          <li><a href="/locations/river-north-vending">River North Vending</a></li>
+          <li><a href="/locations/naperville-vending">Naperville Vending</a></li>
+          <li><a href="/locations/schaumburg-vending">Schaumburg Vending</a></li>
+          <li><a href="/locations/evanston-vending">Evanston Vending</a></li>
+          <li><a href="/locations">All Locations →</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Industries</h4>
+        <ul>
+          <li><a href="/industries/office-building-vending">Office Building Vending</a></li>
+          <li><a href="/industries/gym-fitness-vending">Gym &amp; Fitness Vending</a></li>
+          <li><a href="/industries/school-university-vending">School &amp; University Vending</a></li>
+          <li><a href="/industries/hospital-healthcare-vending">Hospital &amp; Healthcare</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/blog">Blog &amp; Resources</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/#quiz">Get Free Quote</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Chicago Vending Co. All rights reserved. Serving Chicago, IL and suburbs since 2012.</p>
+      <div class="footer-links">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/sitemap.xml">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--c-near-black);
+    border-top: 1px solid var(--c-border);
+    padding: 72px 0 32px;
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: 40px; margin-bottom: 64px;
+  }
+  .logo {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-body); font-size: 17px; color: var(--c-white);
+    margin-bottom: 16px;
+  }
+  .logo-icon { color: var(--c-orange); }
+  .logo strong { color: var(--c-orange); font-weight: 500; }
+  .footer-tagline {
+    font-size: 14px; color: rgba(248,245,240,0.5);
+    line-height: 1.6; margin-bottom: 20px; max-width: 280px;
+  }
+  .footer-contact {
+    display: flex; flex-direction: column; gap: 8px;
+    font-size: 14px; color: rgba(248,245,240,0.6);
+  }
+  .footer-contact a { transition: color 0.2s; }
+  .footer-contact a:hover { color: var(--c-orange); }
+  .footer-col h4 {
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(248,245,240,0.4); font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col a {
+    font-size: 14px; color: rgba(248,245,240,0.6);
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--c-white); }
+  .footer-bottom {
+    border-top: 1px solid var(--c-border);
+    padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .footer-bottom p { font-size: 13px; color: rgba(248,245,240,0.35); }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-size: 13px; color: rgba(248,245,240,0.35); transition: color 0.2s; }
+  .footer-links a:hover { color: var(--c-white); }
+
+  @media (max-width: 1100px) {
+    .footer-top { grid-template-columns: 1fr 1fr 1fr; }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+  @media (max-width: 700px) {
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 500px) {
+    .footer-top { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+  }
+</style>

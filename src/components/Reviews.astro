@@ -1,0 +1,135 @@
+---
+const reviews = [
+  {
+    name: "Marcus T.",
+    role: "Facilities Manager, Salesforce Tower",
+    body: "We've had vending in the Loop for 15 years and Chicago Vending Co is by far the best. They replaced our old machines in 3 days, no downtime, and the cashless payment feature has been huge.",
+    stars: 5,
+  },
+  {
+    name: "Jennifer R.",
+    role: "Office Manager, River North Tech Startup",
+    body: "The healthy options are actually good—not just protein bars nobody buys. Our team asks for specific things and they accommodate. Service calls get answered same-day. Highly recommend.",
+    stars: 5,
+  },
+  {
+    name: "David K.",
+    role: "GM, Equinox Fitness Schaumburg",
+    body: "Having a vending partner that understands fitness-focused customers was key for us. They curated a perfect mix of electrolytes, protein, and snacks. Members love it.",
+    stars: 5,
+  },
+  {
+    name: "Rosa M.",
+    role: "HR Director, Naperville Manufacturing Co.",
+    body: "400 employees on two shifts—keeping the break room stocked used to be a nightmare. Chicago Vending Co handles everything. Zero cost to us, zero headaches.",
+    stars: 5,
+  },
+  {
+    name: "Brian L.",
+    role: "Property Manager, 8 Chicago Buildings",
+    body: "I manage vending across 8 commercial properties. Having one vendor who covers Loop to suburbs, responds fast, and keeps machines looking modern has simplified my life enormously.",
+    stars: 5,
+  },
+  {
+    name: "Aisha W.",
+    role: "Ops Lead, UIC Health Sciences",
+    body: "Healthcare settings have strict requirements. They understood that immediately—nutritional labeling, ADA-compliant machines, contactless pay. Installed 6 units across our campus.",
+    stars: 5,
+  },
+];
+---
+
+<section class="reviews-section" id="reviews">
+  <div class="container">
+    <div class="section-label">Reviews</div>
+    <div class="reviews-header">
+      <h2 class="section-title">Chicago businesses <span class="accent">love us</span></h2>
+      <div class="reviews-meta">
+        <span class="reviews-stars">★★★★★</span>
+        <span class="reviews-count">4.9 / 5 from 127 Google reviews</span>
+      </div>
+    </div>
+
+    <div class="reviews-grid">
+      {reviews.map((r) => (
+        <div class="review-card">
+          <div class="review-stars">{"★".repeat(r.stars)}</div>
+          <p class="review-body">"{r.body}"</p>
+          <div class="review-author">
+            <div class="review-avatar">
+              {r.name.split(' ').map(w => w[0]).join('')}
+            </div>
+            <div>
+              <strong class="review-name">{r.name}</strong>
+              <span class="review-role">{r.role}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="reviews-cta">
+      <a href="#quiz" class="btn-primary">
+        Join 400+ Chicago businesses
+        <span>→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews-section {
+    padding: 100px 0;
+    background: var(--c-near-black);
+  }
+  .reviews-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 48px; flex-wrap: wrap; gap: 16px;
+  }
+  .reviews-meta {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .reviews-stars { color: #FBBF24; font-size: 20px; }
+  .reviews-count { font-size: 14px; color: rgba(248,245,240,0.5); }
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 20px; margin-bottom: 48px;
+  }
+  .review-card {
+    background: var(--c-dark); border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg); padding: 28px;
+    transition: border-color 0.2s;
+  }
+  .review-card:hover { border-color: rgba(255,78,0,0.25); }
+  .review-stars { color: #FBBF24; font-size: 14px; margin-bottom: 14px; }
+  .review-body {
+    font-size: 15px; color: rgba(248,245,240,0.8); line-height: 1.65;
+    margin-bottom: 20px; font-style: italic;
+  }
+  .review-author { display: flex; gap: 12px; align-items: center; }
+  .review-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: rgba(255,78,0,0.15); color: var(--c-orange);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 500; flex-shrink: 0;
+  }
+  .review-name { display: block; font-size: 14px; font-weight: 500; }
+  .review-role { font-size: 12px; color: rgba(248,245,240,0.45); }
+  .reviews-cta { text-align: center; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--c-orange); color: #fff;
+    padding: 16px 32px; border-radius: var(--radius);
+    font-size: 17px; font-weight: 500;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--c-orange-dark); transform: translateY(-2px); }
+
+  @media (max-width: 900px) {
+    .reviews-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .reviews-grid { grid-template-columns: 1fr; }
+    .reviews-header { flex-direction: column; align-items: flex-start; }
+  }
+</style>

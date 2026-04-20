@@ -1,0 +1,122 @@
+---
+---
+<!-- Sticky bottom CTA for mobile -->
+<div class="sticky-cta" id="stickyCta" aria-label="Quick contact">
+  <a href="tel:+13125550190" class="sticky-call">
+    📞 Call Now
+  </a>
+  <a href="#quiz" class="sticky-quiz">
+    Get Free Quote →
+  </a>
+</div>
+
+<!-- Exit-intent popup -->
+<div class="exit-overlay" id="exitOverlay" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="exit-modal">
+    <button class="exit-close" id="exitClose" aria-label="Close">✕</button>
+    <div class="exit-icon">⚡</div>
+    <h3>Wait — before you go</h3>
+    <p>Get a free, no-commitment quote for your Chicago location. Takes 90 seconds.</p>
+    <a href="#quiz" class="exit-cta" id="exitCta">See If You Qualify — Free →</a>
+    <button class="exit-dismiss" id="exitDismiss">No thanks, I'll pass on free vending</button>
+  </div>
+</div>
+
+<style>
+  .sticky-cta {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 90;
+    display: none; grid-template-columns: 1fr 2fr;
+    background: var(--c-dark); border-top: 1px solid var(--c-border);
+    padding: 12px 16px; gap: 10px;
+  }
+  .sticky-call, .sticky-quiz {
+    padding: 14px; border-radius: var(--radius);
+    font-size: 15px; font-weight: 500; text-align: center;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .sticky-call {
+    border: 1px solid var(--c-border);
+    color: var(--c-white);
+  }
+  .sticky-quiz {
+    background: var(--c-orange); color: #fff;
+  }
+
+  /* Exit intent */
+  .exit-overlay {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,0.75);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .exit-overlay.visible {
+    opacity: 1; pointer-events: all;
+  }
+  .exit-modal {
+    background: var(--c-dark); border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    padding: 40px 36px; max-width: 440px; width: 100%;
+    text-align: center; position: relative;
+  }
+  .exit-close {
+    position: absolute; top: 16px; right: 16px;
+    background: none; border: none; color: rgba(248,245,240,0.4);
+    font-size: 16px; cursor: pointer;
+  }
+  .exit-icon { font-size: 36px; margin-bottom: 16px; }
+  .exit-modal h3 { font-size: 24px; font-weight: 500; margin-bottom: 12px; }
+  .exit-modal p { font-size: 15px; color: rgba(248,245,240,0.6); margin-bottom: 28px; }
+  .exit-cta {
+    display: block; background: var(--c-orange); color: #fff;
+    padding: 16px 24px; border-radius: var(--radius);
+    font-size: 16px; font-weight: 500; margin-bottom: 14px;
+    transition: background 0.2s;
+  }
+  .exit-cta:hover { background: var(--c-orange-dark); }
+  .exit-dismiss {
+    background: none; border: none; cursor: pointer;
+    font-size: 12px; color: rgba(248,245,240,0.3);
+    font-family: var(--font-body);
+  }
+
+  @media (max-width: 768px) {
+    .sticky-cta { display: grid; }
+  }
+</style>
+
+<script>
+  // Show sticky CTA after scroll
+  const stickyCta = document.getElementById('stickyCta');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      stickyCta?.style && (stickyCta.style.display = 'grid');
+    }
+  }, { passive: true });
+
+  // Exit intent
+  const overlay = document.getElementById('exitOverlay');
+  const closeBtn = document.getElementById('exitClose');
+  const dismissBtn = document.getElementById('exitDismiss');
+  const exitCta = document.getElementById('exitCta');
+  let shown = false;
+
+  document.addEventListener('mouseleave', (e) => {
+    if (e.clientY <= 0 && !shown && !sessionStorage.getItem('exitShown')) {
+      shown = true;
+      sessionStorage.setItem('exitShown', '1');
+      overlay?.classList.add('visible');
+      overlay?.setAttribute('aria-hidden', 'false');
+    }
+  });
+
+  function closeModal() {
+    overlay?.classList.remove('visible');
+    overlay?.setAttribute('aria-hidden', 'true');
+  }
+  closeBtn?.addEventListener('click', closeModal);
+  dismissBtn?.addEventListener('click', closeModal);
+  exitCta?.addEventListener('click', closeModal);
+  overlay?.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+</script>

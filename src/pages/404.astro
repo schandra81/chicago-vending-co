@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+---
+
+<Base title="Page Not Found | Chicago Vending Co." description="The page you're looking for doesn't exist. Return to Chicago Vending Co. homepage.">
+  <Nav />
+  <main class="not-found">
+    <div class="container nf-inner">
+      <div class="nf-number">404</div>
+      <h1>This page got stuck in the vending machine</h1>
+      <p>The page you're looking for doesn't exist or has been moved. Let's get you back on track.</p>
+      <div class="nf-actions">
+        <a href="/" class="btn-primary">Back to Homepage →</a>
+        <a href="/blog" class="btn-ghost">Browse Our Blog</a>
+        <a href="/contact" class="btn-ghost">Contact Us</a>
+      </div>
+      <div class="nf-links">
+        <span>Or go directly to:</span>
+        <a href="/#services">Services</a>
+        <a href="/#quiz">Get Free Quote</a>
+        <a href="/#locations">Locations</a>
+        <a href="/#reviews">Reviews</a>
+      </div>
+    </div>
+  </main>
+</Base>
+
+<style>
+  .not-found{min-height:calc(100svh - 68px);display:flex;align-items:center;padding:120px 0 80px}
+  .nf-inner{text-align:center;max-width:600px;margin:0 auto}
+  .nf-number{font-family:var(--font-display);font-size:clamp(120px,20vw,200px);color:rgba(255,78,0,.15);line-height:1;margin-bottom:-20px}
+  .nf-inner h1{font-family:var(--font-display);font-size:clamp(28px,5vw,52px);font-weight:400;margin-bottom:16px;line-height:1.15}
+  .nf-inner p{font-size:17px;color:rgba(248,245,240,.6);margin-bottom:40px;line-height:1.65}
+  .nf-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+  .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--c-orange);color:#fff;padding:14px 24px;border-radius:var(--radius);font-size:15px;font-weight:500;transition:background .2s}
+  .btn-primary:hover{background:var(--c-orange-dark)}
+  .btn-ghost{display:inline-flex;align-items:center;border:1px solid rgba(248,245,240,.2);color:rgba(248,245,240,.8);padding:14px 20px;border-radius:var(--radius);font-size:15px;transition:border-color .2s}
+  .btn-ghost:hover{border-color:rgba(248,245,240,.5)}
+  .nf-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;font-size:14px;color:rgba(248,245,240,.4)}
+  .nf-links a{color:var(--c-orange);transition:opacity .2s}
+  .nf-links a:hover{opacity:.75}
+</style>

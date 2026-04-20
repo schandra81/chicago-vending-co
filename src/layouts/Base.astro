@@ -1,0 +1,412 @@
+---
+export interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: string;
+  noindex?: boolean;
+  articleDate?: string;
+  articleModified?: string;
+  authorName?: string;
+  schemaType?: 'homepage' | 'blog' | 'location' | 'industry' | 'legal' | 'contact' | 'about' | 'default';
+}
+
+const {
+  title = "Chicago Vending Co. | Free Vending Machines for Chicago Businesses",
+  description = "Chicago's #1 vending machine provider. Free installation, 24/7 service, healthy & snack options. Serving Loop, River North, Naperville & all Chicago metro offices, schools & gyms.",
+  canonical = "https://chicagovendingco.com",
+  ogImage = "https://chicagovendingco.com/og-image.jpg",
+  ogType = "website",
+  noindex = false,
+  articleDate,
+  articleModified,
+  authorName = "Chicago Vending Co. Team",
+  schemaType = "default",
+} = Astro.props;
+
+// Sitewide Organization schema — appears on every page
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://chicagovendingco.com/#organization",
+  "name": "Chicago Vending Co.",
+  "url": "https://chicagovendingco.com",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://chicagovendingco.com/logo.png",
+    "width": 200,
+    "height": 60,
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-312-555-0190",
+    "contactType": "customer service",
+    "areaServed": "Chicago metropolitan area",
+    "availableLanguage": "English",
+    "hoursAvailable": "Mo-Fr 08:00-18:00",
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "350 N Orleans St",
+    "addressLocality": "Chicago",
+    "addressRegion": "IL",
+    "postalCode": "60654",
+    "addressCountry": "US",
+  },
+  "sameAs": [
+    "https://www.google.com/maps/place/chicago-vending-co",
+    "https://www.yelp.com/biz/chicago-vending-co",
+    "https://www.linkedin.com/company/chicago-vending-co",
+    "https://www.facebook.com/chicagovendingco",
+  ],
+};
+
+// Full LocalBusiness schema — homepage and location pages
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "FoodEstablishment"],
+  "@id": "https://chicagovendingco.com/#localbusiness",
+  "name": "Chicago Vending Co.",
+  "description": "Chicago's premier vending machine service provider. Free installation, weekly restocking, and 4-hour service SLA for offices, schools, gyms, and healthcare facilities.",
+  "url": "https://chicagovendingco.com",
+  "telephone": "+1-312-555-0190",
+  "email": "hello@chicagovendingco.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "350 N Orleans St",
+    "addressLocality": "Chicago",
+    "addressRegion": "IL",
+    "postalCode": "60654",
+    "addressCountry": "US",
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 41.8827,
+    "longitude": -87.6233,
+  },
+  "areaServed": [
+    { "@type": "City", "name": "Chicago", "sameAs": "https://www.wikidata.org/wiki/Q1297" },
+    { "@type": "City", "name": "Naperville" },
+    { "@type": "City", "name": "Schaumburg" },
+    { "@type": "City", "name": "Evanston" },
+    { "@type": "City", "name": "Oak Park" },
+    { "@type": "City", "name": "Joliet" },
+    { "@type": "City", "name": "Orland Park" },
+    { "@type": "City", "name": "Skokie" },
+    { "@type": "City", "name": "Rosemont" },
+  ],
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "18:00" },
+  ],
+  "priceRange": "$",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Vending Machine Services",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Snack & Beverage Vending", "description": "200+ SKU vending machines with snacks and beverages" }, "price": "0", "priceCurrency": "USD" },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Healthy & Organic Vending", "description": "Organic and better-for-you vending options" }, "price": "0", "priceCurrency": "USD" },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Coffee Machine Service", "description": "Bean-to-cup espresso and coffee machines" }, "price": "0", "priceCurrency": "USD" },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Micro-Market Installation", "description": "Open-format grab-and-go markets with fresh food" }, "price": "0", "priceCurrency": "USD" },
+    ],
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "127",
+    "bestRating": "5",
+    "worstRating": "1",
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "author": { "@type": "Person", "name": "Marcus T." },
+      "reviewBody": "We've had vending in the Loop for 15 years and Chicago Vending Co is by far the best. Replaced our old machines in 3 days, no downtime, and the cashless payment feature has been huge.",
+      "datePublished": "2024-11-15",
+      "publisher": { "@type": "Organization", "name": "Google" },
+    },
+    {
+      "@type": "Review",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "author": { "@type": "Person", "name": "Jennifer R." },
+      "reviewBody": "The healthy options are actually good — not just protein bars nobody buys. Service calls get answered same-day.",
+      "datePublished": "2025-01-08",
+      "publisher": { "@type": "Organization", "name": "Google" },
+    },
+    {
+      "@type": "Review",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "author": { "@type": "Person", "name": "Rosa M." },
+      "reviewBody": "400 employees on two shifts. Chicago Vending Co handles everything. Zero cost to us, zero headaches.",
+      "datePublished": "2025-02-20",
+      "publisher": { "@type": "Organization", "name": "Google" },
+    },
+  ],
+  "foundingDate": "2012",
+  "numberOfEmployees": { "@type": "QuantitativeValue", "value": 22 },
+  "slogan": "Free vending machines for Chicago businesses",
+};
+
+// WebSite schema with SearchAction for Google Sitelinks Searchbox
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://chicagovendingco.com/#website",
+  "url": "https://chicagovendingco.com",
+  "name": "Chicago Vending Co.",
+  "description": "Free vending machine installation for Chicago businesses",
+  "publisher": { "@id": "https://chicagovendingco.com/#organization" },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": { "@type": "EntryPoint", "urlTemplate": "https://chicagovendingco.com/search?q={search_term_string}" },
+    "query-input": "required name=search_term_string",
+  },
+};
+
+// HowTo schema for the homepage process section
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to Get Free Vending Machines for Your Chicago Business",
+  "description": "Four simple steps to get free vending machines installed at your Chicago office, school, gym, or healthcare facility.",
+  "totalTime": "P7D",
+  "estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": "0" },
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "Apply online", "text": "Fill out our 2-minute qualifier form with your location type, size, and service preferences." },
+    { "@type": "HowToStep", "position": 2, "name": "Free site assessment", "text": "A Chicago-based rep visits your location within 48 hours to confirm placement and electrical access." },
+    { "@type": "HowToStep", "position": 3, "name": "We install everything", "text": "Our crew delivers and installs machines within 5–7 business days at zero cost to you." },
+    { "@type": "HowToStep", "position": 4, "name": "We keep it running", "text": "Weekly restocking, 4-hour service SLA, cashless payments, and quarterly product reviews — all handled." },
+  ],
+};
+
+// Speakable schema — enables Google Assistant voice answers
+const speakableSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".hero-sub", ".section-sub", ".speakable"],
+  },
+  "url": canonical,
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary SEO -->
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+  {!noindex && <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />}
+
+  <!-- Geo targeting — critical for local SEO -->
+  <meta name="geo.region" content="US-IL" />
+  <meta name="geo.placename" content="Chicago, Illinois" />
+  <meta name="geo.position" content="41.8827;-87.6233" />
+  <meta name="ICBM" content="41.8827, -87.6233" />
+
+  <!-- Open Graph — full spec -->
+  <meta property="og:site_name" content="Chicago Vending Co." />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Chicago Vending Co. — Free vending machines for Chicago businesses" />
+  <meta property="og:locale" content="en_US" />
+  {articleDate && <meta property="article:published_time" content={articleDate} />}
+  {articleModified && <meta property="article:modified_time" content={articleModified} />}
+  {ogType === 'article' && <meta property="article:author" content={authorName} />}
+  {ogType === 'article' && <meta property="article:publisher" content="https://www.facebook.com/chicagovendingco" />}
+
+  <!-- Twitter / X Card — full spec -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@ChiVendingCo" />
+  <meta name="twitter:creator" content="@ChiVendingCo" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+  <meta name="twitter:image:alt" content="Chicago Vending Co. — Free vending machines for Chicago businesses" />
+
+  <!-- Favicon stack -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#FF4E00" />
+  <meta name="msapplication-TileColor" content="#FF4E00" />
+
+  <!-- Fonts — preconnect FIRST, then preload critical weight, then full load -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Preload only what's above fold: Bebas Neue (hero h1) + DM Sans 400 (body) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500&display=swap" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  </noscript>
+
+  <!-- DNS prefetch for images from external domains -->
+  <link rel="dns-prefetch" href="https://images.loopnet.com" />
+  <link rel="dns-prefetch" href="https://americandiningcreations.com" />
+  <link rel="dns-prefetch" href="https://images.sundun.com" />
+
+  <!-- Critical above-fold CSS inlined for LCP improvement -->
+  <style>
+    /* Critical: prevents layout shift on initial render */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--c-orange:#FF4E00;--c-orange-dark:#CC3E00;--c-orange-light:#FF7A40;--c-black:#0A0A0A;--c-near-black:#111111;--c-dark:#1A1A1A;--c-border:rgba(255,255,255,0.08);--c-white:#F8F5F0;--font-display:'Bebas Neue',sans-serif;--font-body:'DM Sans',sans-serif;--max-w:1200px;--radius:4px;--radius-lg:12px}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+    body{font-family:var(--font-body),system-ui,sans-serif;background:var(--c-black);color:var(--c-white);line-height:1.6;overflow-x:hidden}
+    /* Reserve height for nav to prevent CLS */
+    .nav-wrap{height:68px;position:fixed;top:0;left:0;right:0;z-index:100}
+    /* Font-display: swap fallback to prevent FOIT */
+    @font-face{font-family:'Bebas Neue';font-display:swap}
+    @font-face{font-family:'DM Sans';font-display:swap}
+  </style>
+
+  <!-- Remaining global styles (non-critical, loaded after LCP) -->
+  <style is:global>
+    h1,h2,h3{line-height:1.1;font-weight:500}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:var(--max-w);margin:0 auto;padding:0 24px}
+    @media(max-width:768px){.container{padding:0 16px}}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .speakable{} /* Hook for speakable schema */
+    /* Lazy load animation for below-fold sections */
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    /* Print styles — improves blog post usability */
+    @media print{
+      .nav-wrap,.sticky-cta,.exit-overlay,.nav-cta,.nav-mobile-btn{display:none!important}
+      body{background:#fff;color:#000}
+      a{color:#000;text-decoration:underline}
+      .container{max-width:100%;padding:0}
+      h1,h2,h3{color:#000;page-break-after:avoid}
+      p,li{color:#333;font-size:12pt;line-height:1.6}
+      img{max-width:100%;page-break-inside:avoid}
+      .article-sidebar{display:none}
+      .article-layout{grid-template-columns:1fr!important}
+    }
+  </style>
+
+  <!-- Structured Data: Organization (every page) -->
+  <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+
+  <!-- Structured Data: WebSite with SearchAction (every page) -->
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+
+  <!-- Structured Data: Full LocalBusiness (homepage + contact) -->
+  {(schemaType === 'homepage' || schemaType === 'contact') && (
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+  )}
+
+  <!-- Structured Data: HowTo (homepage) -->
+  {schemaType === 'homepage' && (
+    <script type="application/ld+json" set:html={JSON.stringify(howToSchema)} />
+  )}
+
+  <!-- Structured Data: Speakable WebPage (all content pages) -->
+  {schemaType !== 'legal' && (
+    <script type="application/ld+json" set:html={JSON.stringify(speakableSchema)} />
+  )}
+
+  <!-- Slot for page-specific schema injected from child pages -->
+  <slot name="head-schema" />
+
+  <style is:global>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --c-orange: #FF4E00;
+      --c-orange-dark: #CC3E00;
+      --c-orange-light: #FF7A40;
+      --c-black: #0A0A0A;
+      --c-near-black: #111111;
+      --c-dark: #1A1A1A;
+      --c-mid: #2E2E2E;
+      --c-muted: #666666;
+      --c-border: rgba(255,255,255,0.08);
+      --c-white: #F8F5F0;
+      --c-cream: #EDE8E0;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --max-w: 1200px;
+      --radius: 4px;
+      --radius-lg: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--c-black);
+      color: var(--c-white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 { line-height: 1.1; font-weight: 500; }
+
+    a { color: inherit; text-decoration: none; }
+
+    img { max-width: 100%; display: block; }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 16px; }
+    }
+
+    /* Utility */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+  </style>
+</head>
+<body>
+  <slot />
+
+  <!-- Scroll-reveal: wires up .reveal class site-wide -->
+  <script>
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+  </script>
+
+  <!-- Web Vitals: preload next-page on hover for instant navigation -->
+  <script>
+    let prefetched = new Set();
+    document.addEventListener('mouseover', (e) => {
+      const link = (e.target as Element)?.closest('a[href]') as HTMLAnchorElement;
+      if (!link || !link.href.startsWith(location.origin) || prefetched.has(link.href)) return;
+      prefetched.add(link.href);
+      const el = document.createElement('link');
+      el.rel = 'prefetch';
+      el.href = link.href;
+      document.head.appendChild(el);
+    }, { passive: true });
+  </script></body>
+</html>

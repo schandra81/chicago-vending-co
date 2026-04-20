@@ -1,0 +1,307 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { locations } from '../../content/locations';
+
+export async function getStaticPaths() {
+  return locations.map(loc => ({
+    params: { slug: loc.slug },
+    props: { loc },
+  }));
+}
+
+const { loc } = Astro.props;
+---
+
+<Base
+  title={`Vending Machines in ${loc.name}, Chicago | Chicago Vending Co.`}
+  description={`Free vending machine installation in ${loc.name}, ${loc.region}. Snacks, beverages, coffee & micro-markets for ${loc.name} offices, gyms, schools & healthcare. Same-day quotes.`}
+  canonical={`https://chicagovendingco.com/locations/${loc.slug}`}
+  ogImage={loc.image}
+>
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://chicagovendingco.com" },
+      { "@type": "ListItem", "position": 2, "name": "Locations", "item": "https://chicagovendingco.com/locations" },
+      { "@type": "ListItem", "position": 3, "name": loc.name, "item": `https://chicagovendingco.com/locations/${loc.slug}` },
+    ]
+  })} />
+
+  <!-- LocalBusiness with areaServed Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Chicago Vending Co.",
+    "url": "https://chicagovendingco.com",
+    "telephone": "+1-312-555-0190",
+    "address": { "@type": "PostalAddress", "streetAddress": "350 N Orleans St", "addressLocality": "Chicago", "addressRegion": "IL", "postalCode": "60654", "addressCountry": "US" },
+    "areaServed": { "@type": "Place", "name": loc.name, "address": { "@type": "PostalAddress", "addressLocality": loc.name, "addressRegion": "IL" } },
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "127" },
+  })} />
+
+  <Nav />
+  <main>
+
+    <!-- Hero -->
+    <section class="loc-hero">
+      <div class="loc-hero-img-wrap" aria-hidden="true">
+        <img src={loc.image} alt={loc.imageAlt} loading="eager" />
+        <div class="loc-hero-overlay"></div>
+      </div>
+      <div class="container loc-hero-content">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a><span aria-hidden="true">›</span>
+          <a href="/locations">Locations</a><span aria-hidden="true">›</span>
+          <span aria-current="page">{loc.name}</span>
+        </nav>
+        <div class="loc-badge">📍 {loc.region}</div>
+        <h1>Vending Machines in<br><span class="accent">{loc.name}</span></h1>
+        <p>Free installation, weekly restocking, and 4-hour service — serving {loc.name} businesses with modern vending since 2012.</p>
+        <div class="loc-hero-actions">
+          <a href="/#quiz" class="btn-primary">Get Free Quote for {loc.shortName} →</a>
+          <a href="tel:+13125550190" class="btn-ghost">📞 (312) 555-0190</a>
+        </div>
+        <div class="loc-stats">
+          {loc.stats.map(s => (
+            <div class="ls-item"><strong>{s.value}</strong><span>{s.label}</span></div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- About this area -->
+    <section class="loc-about">
+      <div class="container loc-about-grid">
+        <div class="lac-copy">
+          <div class="section-label">Serving {loc.name}</div>
+          <h2>Why {loc.name} businesses choose us</h2>
+          <p>{loc.description}</p>
+          <p>Our Chicago-based service team knows {loc.name}'s streets, buildings, and business rhythms. When a machine needs service, we dispatch from the city — not from a regional warehouse hours away.</p>
+          <div class="loc-zip-codes">
+            <span class="lzc-label">Zip codes served:</span>
+            {loc.zipCodes.map(z => <span class="lzc-code">{z}</span>)}
+          </div>
+        </div>
+        <div class="lac-sidebar">
+          <div class="lac-cta-box">
+            <h3>Free quote for {loc.shortName}</h3>
+            <p>Most {loc.name} locations qualify within 2 minutes. No commitment.</p>
+            <a href="/#quiz" class="sidebar-btn">Check If You Qualify →</a>
+          </div>
+          <div class="lac-nearby">
+            <div class="lac-nearby-label">Also serving nearby</div>
+            <div class="lac-nearby-list">
+              {loc.nearbyAreas.map(area => <span>{area}</span>)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Businesses we serve -->
+    <section class="loc-businesses">
+      <div class="container">
+        <div class="section-label">Who We Serve in {loc.shortName}</div>
+        <h2>Trusted by {loc.name}'s <span class="accent">leading employers</span></h2>
+        <div class="biz-grid">
+          {loc.businesses.map(biz => (
+            <div class="biz-item">
+              <div class="biz-dot"></div>
+              <span>{biz}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="loc-services">
+      <div class="container">
+        <div class="section-label">Our Services in {loc.shortName}</div>
+        <h2>Everything your {loc.shortName}<br><span class="accent">break room needs</span></h2>
+        <div class="lsvc-grid">
+          <a href="/industries/office-building-vending" class="lsvc-card">
+            <div class="lsvc-icon">🥤</div>
+            <h3>Snack & Beverage</h3>
+            <p>200+ SKUs. Name brands. Weekly restocking. Free installation.</p>
+            <span class="lsvc-link">Learn more →</span>
+          </a>
+          <a href="/#services" class="lsvc-card">
+            <div class="lsvc-icon">🥗</div>
+            <h3>Healthy & Organic</h3>
+            <p>KIND, RxBar, kombucha, sparkling water. For health-conscious teams.</p>
+            <span class="lsvc-link">Learn more →</span>
+          </a>
+          <a href="/#services" class="lsvc-card">
+            <div class="lsvc-icon">☕</div>
+            <h3>Coffee Service</h3>
+            <p>Bean-to-cup espresso machines. Fresh-ground every cup. Free to install.</p>
+            <span class="lsvc-link">Learn more →</span>
+          </a>
+          <a href="/#services" class="lsvc-card">
+            <div class="lsvc-icon">🏪</div>
+            <h3>Micro-Markets</h3>
+            <p>Open-format grab-and-go. Fresh food, no attendant needed.</p>
+            <span class="lsvc-link">Learn more →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="loc-testimonial">
+      <div class="container">
+        <div class="lt-inner">
+          <div class="lt-quote-mark">"</div>
+          <blockquote>{loc.testimonial.quote}</blockquote>
+          <div class="lt-author">
+            <div class="lt-avatar">
+              {loc.testimonial.author.split(' ').map((w: string) => w[0]).join('')}
+            </div>
+            <div>
+              <strong>{loc.testimonial.author}</strong>
+              <span>{loc.testimonial.role}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works local -->
+    <section class="loc-hiw">
+      <div class="container">
+        <div class="section-label">For {loc.shortName} Businesses</div>
+        <h2>Up and running in {loc.shortName}<br><span class="accent">within 7 days</span></h2>
+        <div class="hiw-steps">
+          <div class="hiw-step"><div class="hs-num">01</div><h3>Apply online</h3><p>2-minute qualifier. Tell us about your {loc.shortName} location.</p></div>
+          <div class="hiw-arrow">→</div>
+          <div class="hiw-step"><div class="hs-num">02</div><h3>Site assessment</h3><p>Our {loc.shortName}-area rep visits within 48 hours. Free, no commitment.</p></div>
+          <div class="hiw-arrow">→</div>
+          <div class="hiw-step"><div class="hs-num">03</div><h3>Installation</h3><p>Our crew installs and stocks. You do nothing. Zero cost.</p></div>
+          <div class="hiw-arrow">→</div>
+          <div class="hiw-step"><div class="hs-num">04</div><h3>We handle it</h3><p>Weekly restocking. 4-hour repairs. Ongoing and hassle-free.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="loc-cta">
+      <div class="container loc-cta-inner">
+        <h2>Ready to upgrade vending in {loc.name}?</h2>
+        <p>Free installation. Free service. Free weekly restocking. Most {loc.name} locations qualify in 2 minutes.</p>
+        <a href="/#quiz" class="btn-primary btn-xl">Check If Your {loc.shortName} Location Qualifies →</a>
+        <div class="loc-cta-trust">
+          <span>⭐ 4.9 Google rating</span>
+          <span>·</span>
+          <span>400+ Chicago locations</span>
+          <span>·</span>
+          <span>$0 setup cost</span>
+          <span>·</span>
+          <span>4-hour service SLA</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  /* Hero */
+  .loc-hero{position:relative;min-height:80vh;display:flex;align-items:center;padding:120px 0 80px;overflow:hidden}
+  .loc-hero-img-wrap{position:absolute;inset:0}
+  .loc-hero-img-wrap img{width:100%;height:100%;object-fit:cover;filter:brightness(0.3) saturate(0.7)}
+  .loc-hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,10,0.85) 0%,rgba(10,10,10,0.5) 100%)}
+  .loc-hero-content{position:relative;z-index:2;max-width:700px}
+  .breadcrumb{display:flex;gap:8px;align-items:center;font-size:13px;color:rgba(248,245,240,.45);margin-bottom:20px}
+  .breadcrumb a:hover{color:var(--c-orange)}
+  .breadcrumb span[aria-hidden]{color:rgba(248,245,240,.2)}
+  .loc-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,78,0,.12);border:1px solid rgba(255,78,0,.3);color:var(--c-orange-light);font-size:13px;font-weight:500;padding:6px 14px;border-radius:100px;margin-bottom:20px}
+  .loc-hero h1{font-family:var(--font-display);font-size:clamp(52px,9vw,110px);font-weight:400;line-height:1.05;margin-bottom:18px}
+  .accent{color:var(--c-orange)}
+  .loc-hero p{font-size:18px;color:rgba(248,245,240,.7);max-width:500px;margin-bottom:32px;line-height:1.65}
+  .loc-hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px}
+  .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--c-orange);color:#fff;padding:16px 26px;border-radius:var(--radius);font-size:15px;font-weight:500;transition:background .2s,transform .15s;box-shadow:0 0 40px rgba(255,78,0,.3)}
+  .btn-primary:hover{background:var(--c-orange-dark);transform:translateY(-1px)}
+  .btn-primary.btn-xl{font-size:18px;padding:20px 36px}
+  .btn-ghost{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(248,245,240,.2);color:rgba(248,245,240,.8);padding:16px 22px;border-radius:var(--radius);font-size:15px;transition:border-color .2s}
+  .btn-ghost:hover{border-color:rgba(248,245,240,.5)}
+  .loc-stats{display:flex;gap:32px;flex-wrap:wrap}
+  .ls-item{display:flex;flex-direction:column;gap:3px}
+  .ls-item strong{font-size:24px;font-weight:500;color:var(--c-white)}
+  .ls-item span{font-size:12px;color:rgba(248,245,240,.5)}
+
+  /* About */
+  .loc-about{padding:100px 0;background:var(--c-near-black)}
+  .loc-about-grid{display:grid;grid-template-columns:1fr 340px;gap:60px;align-items:start}
+  .section-label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--c-orange);font-weight:500;margin-bottom:14px}
+  .lac-copy h2{font-family:var(--font-display);font-size:clamp(32px,5vw,56px);font-weight:400;margin-bottom:20px}
+  .lac-copy p{font-size:16px;color:rgba(248,245,240,.7);line-height:1.75;margin-bottom:16px}
+  .loc-zip-codes{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:20px}
+  .lzc-label{font-size:12px;color:rgba(248,245,240,.4)}
+  .lzc-code{font-size:12px;background:rgba(255,255,255,.06);border:1px solid var(--c-border);padding:4px 10px;border-radius:4px;color:rgba(248,245,240,.6);font-family:monospace}
+  .lac-sidebar{display:flex;flex-direction:column;gap:20px;position:sticky;top:100px}
+  .lac-cta-box{background:rgba(255,78,0,.08);border:1px solid rgba(255,78,0,.25);border-radius:var(--radius-lg);padding:24px}
+  .lac-cta-box h3{font-size:18px;font-weight:500;margin-bottom:10px}
+  .lac-cta-box p{font-size:14px;color:rgba(248,245,240,.65);margin-bottom:20px;line-height:1.6}
+  .sidebar-btn{display:block;background:var(--c-orange);color:#fff;padding:13px;border-radius:var(--radius);font-size:15px;font-weight:500;text-align:center;transition:background .2s}
+  .sidebar-btn:hover{background:var(--c-orange-dark)}
+  .lac-nearby{background:var(--c-dark);border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:20px}
+  .lac-nearby-label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(248,245,240,.35);font-weight:500;margin-bottom:12px}
+  .lac-nearby-list{display:flex;flex-wrap:wrap;gap:8px}
+  .lac-nearby-list span{font-size:13px;color:rgba(248,245,240,.6);background:rgba(255,255,255,.04);border:1px solid var(--c-border);padding:5px 12px;border-radius:100px}
+
+  /* Businesses */
+  .loc-businesses{padding:80px 0;background:var(--c-black)}
+  .loc-businesses h2{font-family:var(--font-display);font-size:clamp(32px,5vw,56px);font-weight:400;margin-bottom:40px}
+  .biz-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .biz-item{display:flex;align-items:center;gap:12px;background:var(--c-dark);border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:16px 18px}
+  .biz-dot{width:8px;height:8px;border-radius:50%;background:var(--c-orange);flex-shrink:0}
+  .biz-item span{font-size:14px;color:rgba(248,245,240,.75)}
+
+  /* Services */
+  .loc-services{padding:80px 0;background:var(--c-near-black)}
+  .loc-services h2{font-family:var(--font-display);font-size:clamp(32px,5vw,56px);font-weight:400;margin-bottom:48px}
+  .lsvc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .lsvc-card{background:var(--c-dark);border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:28px;transition:border-color .2s,transform .2s;display:flex;flex-direction:column;gap:10px}
+  .lsvc-card:hover{border-color:rgba(255,78,0,.3);transform:translateY(-4px)}
+  .lsvc-icon{font-size:32px}
+  .lsvc-card h3{font-size:18px;font-weight:500}
+  .lsvc-card p{font-size:14px;color:rgba(248,245,240,.6);line-height:1.6;flex:1}
+  .lsvc-link{font-size:13px;color:var(--c-orange);font-weight:500}
+
+  /* Testimonial */
+  .loc-testimonial{padding:80px 0;background:var(--c-dark)}
+  .lt-inner{max-width:800px;margin:0 auto;text-align:center}
+  .lt-quote-mark{font-family:var(--font-display);font-size:120px;color:rgba(255,78,0,.2);line-height:0.7;margin-bottom:20px}
+  .lt-inner blockquote{font-size:22px;line-height:1.65;color:rgba(248,245,240,.9);font-style:italic;margin-bottom:28px}
+  .lt-author{display:flex;align-items:center;gap:14px;justify-content:center}
+  .lt-avatar{width:44px;height:44px;border-radius:50%;background:rgba(255,78,0,.15);color:var(--c-orange);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;flex-shrink:0}
+  .lt-author strong{display:block;font-size:15px;font-weight:500}
+  .lt-author span{font-size:13px;color:rgba(248,245,240,.5)}
+
+  /* How it works */
+  .loc-hiw{padding:80px 0;background:var(--c-black)}
+  .loc-hiw h2{font-family:var(--font-display);font-size:clamp(32px,5vw,56px);font-weight:400;margin-bottom:48px}
+  .hiw-steps{display:flex;align-items:flex-start;gap:0}
+  .hiw-step{flex:1;padding:24px}
+  .hiw-arrow{font-size:24px;color:var(--c-orange);margin-top:52px;flex-shrink:0}
+  .hs-num{font-family:var(--font-display);font-size:52px;color:rgba(255,78,0,.15);line-height:1;margin-bottom:12px}
+  .hiw-step h3{font-size:18px;font-weight:500;margin-bottom:8px}
+  .hiw-step p{font-size:14px;color:rgba(248,245,240,.6);line-height:1.6}
+
+  /* Final CTA */
+  .loc-cta{padding:100px 0;background:var(--c-near-black);border-top:1px solid var(--c-border)}
+  .loc-cta-inner{text-align:center;max-width:700px;margin:0 auto}
+  .loc-cta h2{font-family:var(--font-display);font-size:clamp(36px,6vw,72px);font-weight:400;margin-bottom:16px}
+  .loc-cta p{font-size:17px;color:rgba(248,245,240,.65);margin-bottom:36px;line-height:1.65}
+  .loc-cta-trust{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:24px;font-size:13px;color:rgba(248,245,240,.4)}
+
+  @media(max-width:1024px){.loc-about-grid{grid-template-columns:1fr}.lac-sidebar{position:static}.lsvc-grid{grid-template-columns:1fr 1fr}.biz-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:768px){.hiw-steps{flex-direction:column}.hiw-arrow{display:none;margin:0}.loc-hero{min-height:auto;padding:120px 0 60px}}
+  @media(max-width:600px){.lsvc-grid{grid-template-columns:1fr}.biz-grid{grid-template-columns:1fr}.loc-stats{gap:20px}}
+</style>

@@ -1,0 +1,189 @@
+---
+import BlogPost from '../../layouts/BlogPost.astro';
+import { posts } from '../../content/blog/posts';
+
+export async function getStaticPaths() {
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+
+// Content for each post keyed by slug
+const content: Record<string, string> = {
+  "free-vending-machines-chicago": `
+    <p>If you manage a Chicago office, school, gym, or healthcare facility, you've probably wondered whether there's a way to get vending machines without paying for them outright. The answer is yes — and it's more straightforward than most people think.</p>
+    <p>Free vending machine programs have been around for decades, but they've evolved significantly. Modern providers like Chicago Vending Co. offer full-service arrangements: <strong>you get the machines, installation, restocking, and maintenance at zero cost.</strong></p>
+    <div class="callout"><div class="callout-title">💡 Quick Summary</div><p>Most Chicago locations with 25+ daily users qualify for free vending machine installation. The provider installs, stocks, and services everything — you pay nothing.</p></div>
+    <h2>How Free Vending Machine Programs Actually Work</h2>
+    <p>The economics are simple. A vending company installs machines at qualifying locations and makes money on every item sold. Because they own the machines and keep the product revenue, there's no cost to you as the location host. In exchange, you provide floor space, a standard 110V electrical outlet, and access for weekly restocking.</p>
+    <blockquote><p>"We thought there had to be a catch. There wasn't. Machines went in on a Tuesday, they were stocked by Thursday, and we haven't had to think about it since." — Rosa M., HR Director, Naperville Manufacturing Co.</p></blockquote>
+    <h2>Does Your Chicago Location Qualify?</h2>
+    <p>Most Chicago locations with 25+ daily users qualify. This includes offices in the Loop, River North, Wicker Park, and suburbs like Naperville and Schaumburg. Schools, gyms, hospitals, warehouses, hotels, and co-working spaces all qualify regularly.</p>
+    <h3>Minimum Requirements</h3>
+    <ul>
+      <li>At least 25 daily users</li>
+      <li>Located within 50 miles of the Chicago Loop</li>
+      <li>Standard electrical access and adequate floor space</li>
+      <li>Indoor, climate-controlled environment</li>
+    </ul>
+    <h2>The Step-by-Step Process</h2>
+    <p><strong>Step 1: Apply online (2 minutes)</strong> — Use the qualifier on our homepage. Answer five quick questions about your location type, size, area, and services wanted.</p>
+    <p><strong>Step 2: Free site assessment (within 48 hours)</strong> — A Chicago-based rep visits your location, walks the space, confirms electrical access, and discusses your team's preferences.</p>
+    <p><strong>Step 3: Installation (within 5–7 days)</strong> — Our crew delivers machines, installs them in agreed locations, programs payment systems, and does an initial full stock.</p>
+    <p><strong>Step 4: Ongoing service (weekly)</strong> — We handle everything from here. Weekly restocking, remote monitoring, 4-hour service SLA, and quarterly product reviews.</p>
+    <div class="callout"><div class="callout-title">⚡ Chicago Service Guarantee</div><p>If a machine goes down and our team isn't on-site within 4 hours, your next month of service is free. We back this up in writing.</p></div>
+    <h2>How to Choose the Right Chicago Vending Provider</h2>
+    <p>Look for: local Chicago headquarters, specific written service SLA, cashless payment on every machine, references from similar Chicago locations, and flexible agreements with no multi-year lock-in.</p>
+    <p>Red flags: 3–5 year contracts required, no specific response time guarantee, limited product selection (under 100 SKUs), cash-only machines, no Chicago-based service team.</p>
+    <div class="callout"><div class="callout-title">🏙️ Ready to get free vending for your Chicago location?</div><p>The qualifier takes 2 minutes. No commitment, no credit card. Find out what you qualify for right now.</p></div>
+  `,
+
+  "healthy-vending-chicago": `
+    <p>There's a persistent myth in workplace vending: that "healthy" means unpopular. After servicing <strong>400+ locations across Chicago</strong>, our data tells a completely different story.</p>
+    <p>When done right, healthy vending outperforms traditional snack selections at many Chicago workplaces. The key is understanding what "healthy" actually means to your specific team in 2025.</p>
+    <div class="callout"><div class="callout-title">📊 Key Insight</div><p>Products with "better-for-you" positioning now account for over 40% of vending revenue across our Chicago network — up from 18% in 2019.</p></div>
+    <h2>Top Sellers Across Chicago's Vending Network</h2>
+    <p>Our top-performing healthy products at Chicago offices: KIND Bars (Dark Chocolate Nuts), Sparkling Ice, RxBar, CORE Hydration Water, Biena Chickpea Snacks, and REBBL Protein Shakes. These aren't aspirational picks — they're the actual top sellers by units at offices across the Loop, River North, and suburbs.</p>
+    <h2>What Works by Industry</h2>
+    <h3>Corporate Offices</h3>
+    <p>Office employees snack mid-morning and mid-afternoon and want options that feel like a reward. Top performers: KIND bars, trail mix, kombucha, sparkling water, Greek yogurt cups.</p>
+    <h3>Gyms &amp; Fitness Centers</h3>
+    <p>Members are actively health-conscious. Top performers: protein bars (Quest, RxBar, ONE), electrolyte drinks (Bodyarmor, Liquid IV), pre-workout shots, nuts and seeds.</p>
+    <h3>Hospitals &amp; Healthcare</h3>
+    <p>Staff on long shifts need energy without a crash. Top performers: KIND bars, mixed nuts, whole grain crackers, sparkling water, granola cups. Nutritional labeling is especially important.</p>
+    <h3>Schools &amp; Universities</h3>
+    <p>Must comply with USDA Smart Snacks standards for K-12. University students lean toward value but are increasingly health-conscious. Top performers: Smart Snacks-compliant bars, baked chips, 100% juice.</p>
+    <h2>The 3 Most Common Healthy Vending Mistakes</h2>
+    <p><strong>1. Stocking products nobody recognizes.</strong> Unknown brands don't sell regardless of nutritional value. Stick to recognizable names your team trusts.</p>
+    <p><strong>2. Going all-in on healthy with no familiar options.</strong> The most successful setups are 60/40 or 70/30 — majority better-for-you, with solid familiar favorites alongside.</p>
+    <p><strong>3. Not refreshing the mix quarterly.</strong> Healthy snack trends change fast. Your vending mix should evolve with your team's tastes. Good providers do this review automatically.</p>
+    <div class="callout"><div class="callout-title">🥗 Want healthy vending at your Chicago location?</div><p>We build a product mix around your team's preferences. Free installation, free service, zero commitment to get started.</p></div>
+  `,
+
+  "office-coffee-service-chicago": `
+    <p>Coffee is no longer just a perk in Chicago offices — it's an expectation. With third-wave coffee culture firmly established across the city (thanks, Intelligentsia and Dark Matter), employees now have strong opinions about what's in the break room.</p>
+    <p>The two most common solutions we install across Chicago are <strong>bean-to-cup machines</strong> and <strong>pod/capsule machines</strong>. The right choice depends on your team size, coffee culture, and maintenance preferences.</p>
+    <h2>Bean-to-Cup: The Premium Experience</h2>
+    <p>Bean-to-cup machines grind fresh beans for each drink, producing barista-quality espresso, lattes, cappuccinos, and Americanos on demand. They're what you see in high-end Chicago offices and co-working spaces.</p>
+    <p><strong>Pros:</strong> Genuinely excellent coffee, full drink menu, lower per-cup cost at scale ($0.20–0.40), employees actually use it reducing coffee shop runs, impressive to clients.</p>
+    <p><strong>Considerations:</strong> Requires regular cleaning, beans need restocking (we handle this), slightly longer brew time (30–60 seconds), larger footprint.</p>
+    <p><strong>Best for:</strong> Offices of 30+ employees, client-facing environments, tech companies, co-working spaces, and anywhere coffee culture matters.</p>
+    <h2>Pod / Capsule Machines: Simple and Consistent</h2>
+    <p>Pod machines offer push-button simplicity. Each drink from a pre-measured capsule makes every cup consistent and maintenance nearly zero.</p>
+    <p><strong>Pros:</strong> Extremely easy to use, almost no cleaning, small footprint, wide pod variety, consistent results.</p>
+    <p><strong>Considerations:</strong> Higher per-cup cost ($0.50–1.20), lower coffee quality, no true espresso drinks, pod waste.</p>
+    <p><strong>Best for:</strong> Smaller offices under 25 people, satellite offices, waiting rooms, or anywhere simplicity is the top priority.</p>
+    <blockquote><p>"We upgraded from a pod machine to bean-to-cup last year. The difference in how often employees use the break room — and how they talk about the office — is noticeable." — Jennifer R., Office Manager, River North Tech Startup</p></blockquote>
+    <h2>Real Cost Comparison for a 75-Person Chicago Office</h2>
+    <ul>
+      <li><strong>Bean-to-cup:</strong> ~$0.30/cup × 150 cups/day × 250 days = $11,250/year</li>
+      <li><strong>Pod machine:</strong> ~$0.80/cup × 150 cups/day × 250 days = $30,000/year</li>
+      <li><strong>Chicago Vending Co. coffee service:</strong> $0 to your location</li>
+    </ul>
+    <h2>Our Recommendation for Chicago</h2>
+    <p>For most Chicago offices with 30+ employees, we recommend bean-to-cup. The quality difference is immediately noticeable, per-cup costs are lower at scale, and it genuinely elevates the office experience. The good news: with Chicago Vending Co., both options are available at zero installation cost.</p>
+    <div class="callout"><div class="callout-title">☕ Get a Free Coffee Machine for Your Chicago Office</div><p>We install bean-to-cup and pod machines at no cost to qualifying Chicago locations. Use our qualifier to check eligibility.</p></div>
+  `,
+
+  "micro-market-vs-vending-chicago": `
+    <p>The vending industry is changing fast. Across Chicago's office parks and corporate campuses, a newer concept is displacing traditional vending machines in many locations: the <strong>micro-market</strong>. But micro-markets aren't right for every location.</p>
+    <h2>What Is a Micro-Market?</h2>
+    <p>A micro-market is essentially a small, unattended convenience store inside your break room. Instead of enclosed vending machines, products are displayed on open shelves and refrigerated cases — just like a mini grocery store. Employees grab what they want and pay at a self-checkout kiosk using card, phone, or app.</p>
+    <h2>The Core Differences</h2>
+    <p><strong>Product variety:</strong> Micro-markets support 300–500+ SKUs including fresh food, sandwiches, salads, and fruit. Traditional machines typically hold 40–80 SKUs.</p>
+    <p><strong>Space:</strong> Micro-markets require 100–400 sq ft of dedicated break room space. A vending machine needs just 4–12 sq ft.</p>
+    <p><strong>Foot traffic:</strong> Micro-markets need 100+ daily users to support fresh food rotation. Traditional vending works from 25+ users.</p>
+    <p><strong>Employee experience:</strong> Open access browsing drives meaningfully higher usage and satisfaction. You can pick up and read labels before purchasing.</p>
+    <h2>When a Micro-Market Is the Right Choice</h2>
+    <ul>
+      <li>Large offices of 100+ employees in Naperville, Schaumburg, or the Loop</li>
+      <li>Healthcare facilities where staff need real meal options during long shifts</li>
+      <li>Manufacturing plants with limited nearby food options</li>
+      <li>Companies running return-to-office initiatives who want the office to feel premium</li>
+    </ul>
+    <h2>When Traditional Vending Is the Right Choice</h2>
+    <ul>
+      <li>Smaller offices of 25–75 people</li>
+      <li>Secure or restricted environments where open-access displays aren't appropriate</li>
+      <li>Lobby or hallway placements without dedicated break room space</li>
+      <li>Locations where zero operational overhead is the priority</li>
+    </ul>
+    <h2>The Hybrid Approach</h2>
+    <p>Many Chicago locations with 150+ employees use both — a micro-market in the main break room for lunch and fresh food, traditional vending on other floors for convenience snacking. Chicago Vending Co. can design and install both as part of a single service agreement.</p>
+    <div class="callout"><div class="callout-title">🏪 Not sure which is right for your Chicago location?</div><p>Our free site assessment includes a specific recommendation. No commitment required.</p></div>
+  `,
+
+  "vending-employee-retention-chicago": `
+    <p>Replacing an employee costs between <strong>50% and 200% of their annual salary</strong>. For a 100-person Chicago company with $75,000 average salaries and 15% annual turnover, that's roughly <strong>$1.1M per year</strong> walking out the door.</p>
+    <p>Against that backdrop, the cost of a well-stocked break room looks very different. Especially when Chicago Vending Co. provides it for free.</p>
+    <h2>What the Research Shows</h2>
+    <p>87% of employees say break room quality affects overall job satisfaction (Staples Workplace Survey). Employees at companies with strong break room amenities are 3× more likely to stay vs. those without (SHRM data). The mechanism is straightforward: break rooms are where employees decompress, connect informally, and form the micro-bonds that make a workplace feel like a community rather than a transaction.</p>
+    <blockquote><p>"We started losing mid-level people to competitors with better office setups. The break room upgrade was part of a broader effort, but employees mentioned it specifically in stay interviews." — HR Director, Chicago Loop Financial Services Firm</p></blockquote>
+    <h2>Break Rooms as Return-to-Office Incentive</h2>
+    <p>Chicago's downtown office market is still navigating the post-pandemic hybrid work transition. Companies winning the RTO battle make the office genuinely better than working from home — not just mandating presence. A break room upgrade is one of the highest-ROI investments: visible daily, social in nature, signals investment in employee experience, and customizable to company culture.</p>
+    <h2>The Real Cost Math</h2>
+    <p>For a Chicago company of 75 people at $70k average salary with 18% turnover: approximately 14 employees lost per year at $52,500 replacement cost each = <strong>$735,000 in annual turnover cost</strong>. A 2% improvement in retention saves $52,500/year. Annual cost of premium vending service: <strong>$0</strong>.</p>
+    <h2>A 5-Step Implementation Plan for Chicago HR Teams</h2>
+    <ol>
+      <li><strong>Audit your current break room</strong> — Walk it with fresh eyes. Is the coffee machine from 2015? Do machines only take cash? Document what you have vs. what's possible.</li>
+      <li><strong>Survey your team</strong> — A 5-question survey on coffee preferences, snack types, and pain points. Signals that input matters before the upgrade even happens.</li>
+      <li><strong>Apply for free vending service</strong> — Chicago Vending Co.'s 2-minute qualifier tells you what you qualify for based on location size and type.</li>
+      <li><strong>Make the upgrade visible</strong> — Send a team email. Turn it into a moment: "We heard your feedback and upgraded the break room."</li>
+      <li><strong>Keep iterating</strong> — Check which products sell after 30 days. Request changes. Make the break room feel alive and responsive.</li>
+    </ol>
+    <div class="callout"><div class="callout-title">🏙️ Ready to upgrade your Chicago break room?</div><p>Free installation, free service, and a product mix built around your team. Use our 2-minute qualifier to see what your Chicago location qualifies for.</p></div>
+  `,
+};
+---
+
+<BlogPost
+  title={post.title}
+  description={post.description}
+  category={post.category}
+  date={post.date}
+  readTime={post.readTime}
+  image={post.image}
+  imageAlt={post.imageAlt}
+  slug={post.slug}
+  tags={post.tags}
+>
+  <Fragment set:html={content[post.slug] || '<p>Content coming soon.</p>'} />
+
+  <!-- Related posts -->
+  <div class="related-posts">
+    <h2>Related Articles</h2>
+    <div class="related-grid">
+      {posts
+        .filter(p => p.slug !== post.slug)
+        .slice(0, 3)
+        .map(related => (
+          <a href={`/blog/${related.slug}`} class="related-card">
+            <img src={related.image} alt={related.imageAlt} loading="lazy"/>
+            <div class="related-body">
+              <div class="related-cat">{related.category}</div>
+              <h4>{related.title}</h4>
+              <span>Read article →</span>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</BlogPost>
+
+<style>
+  .related-posts{margin-top:60px;padding-top:48px;border-top:1px solid var(--c-border)}
+  .related-posts h2{font-family:var(--font-display);font-size:clamp(28px,4vw,44px);font-weight:400;margin-bottom:28px}
+  .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .related-card{display:flex;flex-direction:column;background:var(--c-dark);border:1px solid var(--c-border);border-radius:var(--radius-lg);overflow:hidden;transition:border-color .2s,transform .2s}
+  .related-card:hover{border-color:rgba(255,78,0,.3);transform:translateY(-3px)}
+  .related-card img{width:100%;height:160px;object-fit:cover;filter:brightness(.8)}
+  .related-body{padding:18px}
+  .related-cat{font-size:11px;color:var(--c-orange);font-weight:500;margin-bottom:6px}
+  .related-body h4{font-size:14px;font-weight:500;line-height:1.4;margin-bottom:10px;color:var(--c-white)}
+  .related-body span{font-size:13px;color:var(--c-orange)}
+  @media(max-width:700px){.related-grid{grid-template-columns:1fr}}
+</style>

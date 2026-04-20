@@ -1,0 +1,134 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { locations } from '../../content/locations';
+---
+
+<Base
+  title="Vending Machine Service Areas in Chicago & Suburbs | Chicago Vending Co."
+  description="Chicago Vending Co. serves the entire Chicago metro — Loop, River North, Naperville, Schaumburg, Evanston, Oak Park and all suburbs within 50 miles. Free installation."
+  canonical="https://chicagovendingco.com/locations"
+>
+  <Nav />
+  <main>
+    <section class="locations-hero">
+      <div class="container">
+        <div class="lh-label">Service Coverage</div>
+        <h1>We serve all of<br><span class="accent">Chicago metro</span></h1>
+        <p>From the Gold Coast to Joliet — if you're within 50 miles of the Loop, we've got you covered with free installation, weekly restocking, and 4-hour service response.</p>
+      </div>
+    </section>
+
+    <section class="locations-grid-section">
+      <div class="container">
+        <div class="lg-header">
+          <div class="section-label">All Service Areas</div>
+          <div class="lg-count">Serving {locations.length} major areas + all surrounding neighborhoods</div>
+        </div>
+        <div class="loc-cards-grid">
+          {locations.map(loc => (
+            <a href={`/locations/${loc.slug}`} class="loc-card">
+              <div class="lc-img-wrap">
+                <img src={loc.image} alt={loc.imageAlt} loading="lazy"/>
+                <div class="lc-overlay"></div>
+                <div class="lc-region">{loc.region}</div>
+              </div>
+              <div class="lc-body">
+                <h2>{loc.name}</h2>
+                <p>{loc.description.substring(0, 110)}...</p>
+                <div class="lc-stats">
+                  {loc.stats.slice(0, 2).map(s => (
+                    <div class="lcs-item"><strong>{s.value}</strong><span>{s.label}</span></div>
+                  ))}
+                </div>
+                <div class="lc-link">View {loc.name} vending →</div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="coverage-section">
+      <div class="container">
+        <div class="section-label">Full Coverage Area</div>
+        <h2>If you're in <span class="accent">Chicagoland</span>, we serve you</h2>
+        <div class="coverage-grid">
+          {[
+            { zone: "Downtown Chicago", areas: ["The Loop", "River North", "West Loop / Fulton Market", "South Loop", "Streeterville", "Gold Coast", "Lincoln Park", "Lakeview", "Wicker Park / Bucktown"] },
+            { zone: "North & Northwest Suburbs", areas: ["Evanston", "Skokie", "Glenview", "Niles", "Northbrook", "Deerfield", "Schaumburg", "Palatine", "Hoffman Estates", "Rolling Meadows", "Elk Grove Village"] },
+            { zone: "West Suburbs", areas: ["Oak Park", "River Forest", "Berwyn", "Cicero", "Naperville", "Lisle", "Downers Grove", "Westmont", "Lombard", "Villa Park", "Aurora", "Batavia"] },
+            { zone: "South & Southeast", areas: ["Oak Lawn", "Orland Park", "Tinley Park", "Joliet", "Bolingbrook", "Romeoville", "Mokena", "Frankfort", "New Lenox", "Crestwood"] },
+          ].map(zone => (
+            <div class="zone-card">
+              <h3>{zone.zone}</h3>
+              <ul>
+                {zone.areas.map(a => <li>{a}</li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <p class="coverage-note">Don't see your area? Call us at <a href="tel:+13125550190">(312) 555-0190</a> — if you're within 50 miles of the Loop, we almost certainly serve you.</p>
+      </div>
+    </section>
+
+    <section class="loc-cta-section">
+      <div class="container loc-cta-inner">
+        <h2>Not sure if we serve your area?</h2>
+        <p>Use our 2-minute qualifier. Tell us your location and we'll confirm coverage instantly — plus what you qualify for.</p>
+        <a href="/#quiz" class="btn-primary">Check Your Location →</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .locations-hero{padding:140px 0 72px;background:var(--c-near-black);border-bottom:1px solid var(--c-border)}
+  .lh-label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--c-orange);font-weight:500;margin-bottom:16px}
+  .locations-hero h1{font-family:var(--font-display);font-size:clamp(52px,9vw,110px);font-weight:400;line-height:1.05;margin-bottom:16px}
+  .accent{color:var(--c-orange)}
+  .locations-hero p{font-size:17px;color:rgba(248,245,240,.6);max-width:520px}
+  .section-label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--c-orange);font-weight:500;margin-bottom:14px}
+
+  .locations-grid-section{padding:80px 0;background:var(--c-black)}
+  .lg-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:40px;flex-wrap:wrap;gap:12px}
+  .lg-count{font-size:14px;color:rgba(248,245,240,.45)}
+  .loc-cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .loc-card{display:flex;flex-direction:column;background:var(--c-dark);border:1px solid var(--c-border);border-radius:var(--radius-lg);overflow:hidden;transition:border-color .2s,transform .2s}
+  .loc-card:hover{border-color:rgba(255,78,0,.35);transform:translateY(-4px)}
+  .lc-img-wrap{position:relative;height:200px}
+  .lc-img-wrap img{width:100%;height:100%;object-fit:cover;filter:brightness(.7);transition:transform .5s}
+  .loc-card:hover .lc-img-wrap img{transform:scale(1.04)}
+  .lc-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,26,26,.8) 0%,transparent 60%)}
+  .lc-region{position:absolute;top:12px;left:12px;background:rgba(10,10,10,.7);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.1);color:rgba(248,245,240,.8);font-size:11px;font-weight:500;padding:4px 10px;border-radius:100px}
+  .lc-body{padding:24px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .lc-body h2{font-family:var(--font-display);font-size:28px;font-weight:400}
+  .lc-body p{font-size:14px;color:rgba(248,245,240,.6);line-height:1.65;flex:1}
+  .lc-stats{display:flex;gap:20px}
+  .lcs-item{display:flex;flex-direction:column;gap:2px}
+  .lcs-item strong{font-size:16px;font-weight:500;color:var(--c-orange)}
+  .lcs-item span{font-size:11px;color:rgba(248,245,240,.45)}
+  .lc-link{font-size:13px;color:var(--c-orange);font-weight:500;margin-top:4px}
+
+  .coverage-section{padding:80px 0;background:var(--c-near-black);border-top:1px solid var(--c-border)}
+  .coverage-section h2{font-family:var(--font-display);font-size:clamp(32px,5vw,56px);font-weight:400;margin-bottom:48px}
+  .coverage-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:28px}
+  .zone-card{background:var(--c-dark);border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:24px}
+  .zone-card h3{font-size:15px;font-weight:500;margin-bottom:16px;color:var(--c-orange)}
+  .zone-card ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .zone-card li{font-size:13px;color:rgba(248,245,240,.65)}
+  .coverage-note{font-size:14px;color:rgba(248,245,240,.45)}
+  .coverage-note a{color:var(--c-orange)}
+
+  .loc-cta-section{padding:80px 0;background:var(--c-black)}
+  .loc-cta-inner{text-align:center;max-width:600px;margin:0 auto}
+  .loc-cta-inner h2{font-family:var(--font-display);font-size:clamp(36px,6vw,68px);font-weight:400;margin-bottom:16px}
+  .loc-cta-inner p{font-size:17px;color:rgba(248,245,240,.6);margin-bottom:32px;line-height:1.65}
+  .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--c-orange);color:#fff;padding:18px 32px;border-radius:var(--radius);font-size:17px;font-weight:500;transition:background .2s,transform .15s}
+  .btn-primary:hover{background:var(--c-orange-dark);transform:translateY(-1px)}
+
+  @media(max-width:1024px){.loc-cards-grid{grid-template-columns:1fr 1fr}.coverage-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.loc-cards-grid{grid-template-columns:1fr}.coverage-grid{grid-template-columns:1fr}}
+</style>

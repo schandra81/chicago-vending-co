@@ -1,0 +1,374 @@
+---
+---
+<section class="quiz-section" id="quiz">
+  <div class="container">
+    <div class="quiz-wrapper">
+      <div class="quiz-header">
+        <div class="quiz-label">2-Minute Qualifier</div>
+        <h2 class="quiz-title">See if your Chicago<br>location qualifies</h2>
+        <p class="quiz-sub">Answer 5 quick questions. No commitment. We'll tell you exactly what you qualify for.</p>
+      </div>
+
+      <div class="quiz-body" id="quizBody">
+        <!-- Progress bar -->
+        <div class="quiz-progress">
+          <div class="quiz-progress-bar" id="progressBar" style="width: 20%"></div>
+        </div>
+        <div class="quiz-step-label" id="stepLabel">Question 1 of 5</div>
+
+        <!-- Step 1 -->
+        <div class="quiz-step active" data-step="1">
+          <h3 class="quiz-q">What type of location do you manage?</h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-val="office">🏢 Office Building</button>
+            <button class="quiz-opt" data-val="school">🎓 School / University</button>
+            <button class="quiz-opt" data-val="gym">💪 Gym / Fitness Center</button>
+            <button class="quiz-opt" data-val="hospital">🏥 Hospital / Healthcare</button>
+            <button class="quiz-opt" data-val="warehouse">🏭 Warehouse / Manufacturing</button>
+            <button class="quiz-opt" data-val="other">📍 Other</button>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="quiz-step" data-step="2">
+          <h3 class="quiz-q">How many employees or daily visitors do you have?</h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-val="under25">Under 25</button>
+            <button class="quiz-opt" data-val="25-50">25 – 50</button>
+            <button class="quiz-opt" data-val="50-100">50 – 100</button>
+            <button class="quiz-opt" data-val="100-250">100 – 250</button>
+            <button class="quiz-opt" data-val="250plus">250+</button>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="quiz-step" data-step="3">
+          <h3 class="quiz-q">Where in Chicago or the suburbs are you located?</h3>
+          <div class="quiz-options quiz-options-geo">
+            <button class="quiz-opt" data-val="loop">The Loop / Downtown</button>
+            <button class="quiz-opt" data-val="northside">North Side (Lincoln Park, Lakeview...)</button>
+            <button class="quiz-opt" data-val="westside">West Side (Wicker Park, Logan Square...)</button>
+            <button class="quiz-opt" data-val="southside">South Side / Hyde Park</button>
+            <button class="quiz-opt" data-val="suburbs-north">North Suburbs (Evanston, Skokie...)</button>
+            <button class="quiz-opt" data-val="suburbs-west">West Suburbs (Naperville, Schaumburg...)</button>
+            <button class="quiz-opt" data-val="suburbs-south">South Suburbs</button>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="quiz-step" data-step="4">
+          <h3 class="quiz-q">What are you most interested in?</h3>
+          <div class="quiz-options" id="step4Opts">
+            <button class="quiz-opt multi-select" data-val="snacks">🍿 Snacks & Drinks</button>
+            <button class="quiz-opt multi-select" data-val="healthy">🥗 Healthy Options</button>
+            <button class="quiz-opt multi-select" data-val="coffee">☕ Coffee Machines</button>
+            <button class="quiz-opt multi-select" data-val="market">🏪 Micro-Market</button>
+          </div>
+          <p class="quiz-multi-hint">Select all that apply</p>
+          <button class="quiz-next-btn" id="step4Next" style="display:none">Continue →</button>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="quiz-step" data-step="5">
+          <h3 class="quiz-q">When would you like machines installed?</h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-val="asap">ASAP – Within 2 weeks</button>
+            <button class="quiz-opt" data-val="month">Within a month</button>
+            <button class="quiz-opt" data-val="quarter">Next quarter</button>
+            <button class="quiz-opt" data-val="exploring">Just exploring</button>
+          </div>
+        </div>
+
+        <!-- Result step -->
+        <div class="quiz-step quiz-result" data-step="result">
+          <div class="result-badge" id="resultBadge">✅ You Qualify!</div>
+          <h3 class="result-title" id="resultTitle">Great news—your location qualifies for free vending!</h3>
+          <p class="result-desc" id="resultDesc">Based on your answers, we can have machines at your location within 7 business days.</p>
+
+          <div class="result-reco" id="resultReco"></div>
+
+          <form class="result-form" id="resultForm">
+            <div class="form-row">
+              <input type="text" placeholder="Your name *" id="formName" required />
+              <input type="tel" placeholder="Phone number *" id="formPhone" required />
+            </div>
+            <input type="email" placeholder="Work email *" id="formEmail" required />
+            <input type="text" placeholder="Company / Building name" id="formCompany" />
+            <button type="submit" class="form-submit">
+              Get My Free Quote — Takes 30 Seconds
+              <span>→</span>
+            </button>
+            <p class="form-disclaimer">No spam. No commitment. Chicago-based team calls within 2 hours.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trust signals beside quiz -->
+    <div class="quiz-trust">
+      <h3 class="trust-title">Why Chicago businesses choose us</h3>
+      <ul class="trust-list">
+        <li><span class="tl-icon">✓</span> Zero installation cost</li>
+        <li><span class="tl-icon">✓</span> No revenue share required</li>
+        <li><span class="tl-icon">✓</span> Weekly restocking included</li>
+        <li><span class="tl-icon">✓</span> 4-hour service SLA</li>
+        <li><span class="tl-icon">✓</span> Chicago-based support team</li>
+        <li><span class="tl-icon">✓</span> Cashless & app payments</li>
+        <li><span class="tl-icon">✓</span> Custom product selection</li>
+        <li><span class="tl-icon">✓</span> No long-term lock-in</li>
+      </ul>
+      <div class="trust-logos">
+        <div class="tl-label">Serving teams at</div>
+        <div class="tl-names">WeWork Loop · Salesforce Tower · UIC · Rush Hospital · Equinox River North · Zurich Insurance · Tribune Media · 1871 · Morningstar</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .quiz-section {
+    padding: 100px 0;
+    background: var(--c-black);
+  }
+  .quiz-section .container {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 60px; align-items: start;
+  }
+  .quiz-header { margin-bottom: 40px; }
+  .quiz-label {
+    font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--c-orange); font-weight: 500; margin-bottom: 14px;
+  }
+  .quiz-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 400; margin-bottom: 12px;
+  }
+  .quiz-sub { font-size: 16px; color: rgba(248,245,240,0.6); }
+  .quiz-body {
+    background: var(--c-dark);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+  }
+  .quiz-progress {
+    height: 3px; background: rgba(255,255,255,0.08);
+    border-radius: 3px; margin-bottom: 12px; overflow: hidden;
+  }
+  .quiz-progress-bar {
+    height: 100%; background: var(--c-orange);
+    border-radius: 3px; transition: width 0.4s ease;
+  }
+  .quiz-step-label { font-size: 12px; color: rgba(248,245,240,0.4); margin-bottom: 28px; }
+  .quiz-step { display: none; }
+  .quiz-step.active { display: block; }
+  .quiz-q {
+    font-size: 20px; font-weight: 500;
+    margin-bottom: 24px; line-height: 1.35;
+  }
+  .quiz-options {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .quiz-options-geo { grid-template-columns: 1fr; }
+  .quiz-opt {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    padding: 14px 16px; text-align: left;
+    font-family: var(--font-body); font-size: 15px; color: var(--c-white);
+    cursor: pointer; transition: all 0.15s;
+  }
+  .quiz-opt:hover {
+    background: rgba(255,78,0,0.1);
+    border-color: rgba(255,78,0,0.4);
+    color: var(--c-white);
+  }
+  .quiz-opt.selected {
+    background: rgba(255,78,0,0.15);
+    border-color: var(--c-orange);
+    color: var(--c-white);
+  }
+  .quiz-multi-hint { font-size: 12px; color: rgba(248,245,240,0.4); margin-top: 10px; }
+  .quiz-next-btn {
+    margin-top: 20px; background: var(--c-orange); color: #fff;
+    border: none; border-radius: var(--radius);
+    padding: 14px 28px; font-family: var(--font-body); font-size: 16px; font-weight: 500;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .quiz-next-btn:hover { background: var(--c-orange-dark); }
+
+  /* Result */
+  .quiz-result .result-badge {
+    display: inline-block;
+    background: rgba(34,197,94,0.15); color: #4ade80;
+    border: 1px solid rgba(34,197,94,0.3);
+    padding: 6px 14px; border-radius: 100px;
+    font-size: 14px; font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .result-title {
+    font-size: 22px; font-weight: 500; margin-bottom: 10px; line-height: 1.3;
+  }
+  .result-desc { font-size: 15px; color: rgba(248,245,240,0.6); margin-bottom: 24px; }
+  .result-reco {
+    background: rgba(255,78,0,0.08); border: 1px solid rgba(255,78,0,0.2);
+    border-radius: var(--radius); padding: 16px 18px;
+    font-size: 14px; color: var(--c-orange-light);
+    margin-bottom: 28px; line-height: 1.6;
+  }
+  .result-form { display: flex; flex-direction: column; gap: 12px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .result-form input {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    padding: 14px 16px; color: var(--c-white);
+    font-family: var(--font-body); font-size: 15px;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .result-form input:focus { outline: none; border-color: rgba(255,78,0,0.5); }
+  .result-form input::placeholder { color: rgba(248,245,240,0.35); }
+  .form-submit {
+    background: var(--c-orange); color: #fff;
+    border: none; border-radius: var(--radius);
+    padding: 16px 24px; font-family: var(--font-body); font-size: 16px; font-weight: 500;
+    cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 0 30px rgba(255,78,0,0.25);
+  }
+  .form-submit:hover { background: var(--c-orange-dark); transform: translateY(-1px); }
+  .form-disclaimer { font-size: 12px; color: rgba(248,245,240,0.4); text-align: center; }
+
+  /* Trust sidebar */
+  .quiz-trust {
+    position: sticky; top: 100px;
+  }
+  .trust-title { font-size: 20px; font-weight: 500; margin-bottom: 24px; }
+  .trust-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; }
+  .trust-list li { display: flex; gap: 12px; font-size: 15px; align-items: center; }
+  .tl-icon {
+    width: 22px; height: 22px; border-radius: 50%;
+    background: rgba(255,78,0,0.15); color: var(--c-orange);
+    font-size: 12px; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-weight: 700;
+  }
+  .trust-logos {
+    padding: 20px; background: var(--c-dark);
+    border: 1px solid var(--c-border); border-radius: var(--radius-lg);
+  }
+  .tl-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(248,245,240,0.4); margin-bottom: 10px; }
+  .tl-names { font-size: 13px; color: rgba(248,245,240,0.6); line-height: 1.8; }
+
+  @media (max-width: 1024px) {
+    .quiz-section .container { grid-template-columns: 1fr; }
+    .quiz-trust { position: static; }
+  }
+  @media (max-width: 600px) {
+    .quiz-body { padding: 24px 20px; }
+    .quiz-options { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  const steps = document.querySelectorAll('.quiz-step');
+  const progressBar = document.getElementById('progressBar');
+  const stepLabel = document.getElementById('stepLabel');
+  let currentStep = 1;
+  const totalSteps = 5;
+  const answers: Record<string, string[]> = {};
+
+  function goToStep(n: number | string) {
+    steps.forEach(s => s.classList.remove('active'));
+    const target = document.querySelector(`[data-step="${n}"]`);
+    if (target) target.classList.add('active');
+
+    if (typeof n === 'number') {
+      currentStep = n;
+      const pct = (n / totalSteps) * 100;
+      progressBar!.style.width = pct + '%';
+      stepLabel!.textContent = `Question ${n} of ${totalSteps}`;
+    } else {
+      progressBar!.style.width = '100%';
+      stepLabel!.textContent = 'Almost done!';
+      buildResult();
+    }
+  }
+
+  // Single-select steps
+  document.querySelectorAll('.quiz-step:not([data-step="4"]) .quiz-opt').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const target = e.currentTarget as HTMLButtonElement;
+      const step = target.closest('.quiz-step')!.getAttribute('data-step')!;
+      const val = target.getAttribute('data-val')!;
+      answers[step] = [val];
+
+      if (parseInt(step) < 5) goToStep(parseInt(step) + 1);
+      else goToStep('result');
+    });
+  });
+
+  // Multi-select step 4
+  const step4Opts = document.querySelectorAll('#step4Opts .quiz-opt');
+  const step4Next = document.getElementById('step4Next') as HTMLButtonElement;
+  answers['4'] = [];
+  step4Opts.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btn.classList.toggle('selected');
+      const val = btn.getAttribute('data-val')!;
+      const idx = (answers['4'] as string[]).indexOf(val);
+      if (idx > -1) answers['4'].splice(idx, 1);
+      else answers['4'].push(val);
+      step4Next.style.display = answers['4'].length > 0 ? 'block' : 'none';
+    });
+  });
+  step4Next?.addEventListener('click', () => goToStep(5));
+
+  function buildResult() {
+    const locType = answers['1']?.[0] || 'office';
+    const size = answers['2']?.[0] || '50-100';
+    const area = answers['3']?.[0] || 'loop';
+    const services = answers['4'] || ['snacks'];
+    const timing = answers['5']?.[0] || 'month';
+
+    const areaNames: Record<string, string> = {
+      loop: 'the Loop', northside: 'the North Side', westside: 'the West Side',
+      southside: 'the South Side', 'suburbs-north': 'the North Suburbs',
+      'suburbs-west': 'the West Suburbs', 'suburbs-south': 'the South Suburbs',
+    };
+
+    const svcLabels: Record<string, string> = {
+      snacks: 'Snack & Beverage', healthy: 'Healthy Options',
+      coffee: 'Coffee Service', market: 'Micro-Market',
+    };
+
+    const svcText = services.map(s => svcLabels[s] || s).join(', ');
+    const areaText = areaNames[area] || area;
+
+    const titleEl = document.getElementById('resultTitle')!;
+    const descEl = document.getElementById('resultDesc')!;
+    const recoEl = document.getElementById('resultReco')!;
+
+    titleEl.textContent = `Your ${locType.replace('hospital','healthcare facility')} in ${areaText} qualifies!`;
+
+    const urgency = timing === 'asap'
+      ? 'We can have machines installed within 5 business days.'
+      : 'We can schedule your installation at your convenience.';
+    descEl.textContent = `Based on your answers, we recommend ${svcText} for your location. ${urgency}`;
+
+    const machineCount = size === 'under25' ? 1 : size === '25-50' ? 1 : size === '50-100' ? 2 : size === '100-250' ? 3 : 4;
+    recoEl.innerHTML = `<strong>📦 Recommended package:</strong> ${machineCount} machine${machineCount > 1 ? 's' : ''} — ${svcText}<br>📍 <strong>Service area:</strong> ${areaText} — covered by our Chicago team<br>⚡ <strong>Next step:</strong> Free site assessment, no commitment required`;
+  }
+
+  // Form submit
+  document.getElementById('resultForm')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const btn = (e.currentTarget as HTMLFormElement).querySelector('.form-submit') as HTMLButtonElement;
+    btn.textContent = '✅ Submitted! Expect a call within 2 hours.';
+    btn.style.background = '#16a34a';
+    btn.disabled = true;
+  });
+</script>

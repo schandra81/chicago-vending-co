@@ -1,0 +1,280 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import { industries } from '../../content/locations';
+
+export async function getStaticPaths() {
+  return industries.map(ind => ({
+    params: { slug: ind.slug },
+    props: { ind },
+  }));
+}
+
+const { ind } = Astro.props;
+---
+
+<Base
+  title={`${ind.name} Vending Machines Chicago | Chicago Vending Co.`}
+  description={`Free vending machine installation for Chicago ${ind.name.toLowerCase()}. ${ind.subheadline} Get a free quote in 2 minutes.`}
+  canonical={`https://chicagovendingco.com/industries/${ind.slug}`}
+  ogImage={ind.image}
+>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": `${ind.name} Vending Service Chicago`,
+    "provider": { "@type": "LocalBusiness", "name": "Chicago Vending Co.", "url": "https://chicagovendingco.com" },
+    "areaServed": { "@type": "City", "name": "Chicago" },
+    "description": ind.description,
+    "serviceType": `${ind.name} Vending Machine Service`,
+  })} />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://chicagovendingco.com" },
+      { "@type": "ListItem", "position": 2, "name": "Industries", "item": "https://chicagovendingco.com/industries" },
+      { "@type": "ListItem", "position": 3, "name": ind.name, "item": `https://chicagovendingco.com/industries/${ind.slug}` },
+    ]
+  })} />
+
+  <Nav />
+  <main>
+
+    <!-- Hero -->
+    <section class="ind-hero">
+      <div class="ind-hero-img">
+        <img src={ind.image} alt={ind.imageAlt} loading="eager"/>
+        <div class="ind-hero-overlay"></div>
+      </div>
+      <div class="container ind-hero-content">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a><span>›</span>
+          <a href="/#industries">Industries</a><span>›</span>
+          <span>{ind.name}</span>
+        </nav>
+        <div class="ind-icon-badge">{ind.icon}</div>
+        <h1>{ind.headline}</h1>
+        <p class="ind-sub">{ind.subheadline}</p>
+        <div class="ind-hero-actions">
+          <a href="/#quiz" class="btn-primary">Get Free Quote for {ind.name} →</a>
+          <a href="tel:+13125550190" class="btn-ghost">📞 (312) 555-0190</a>
+        </div>
+        <div class="ind-stats">
+          {ind.stats.map(s => (
+            <div class="is-item"><strong>{s.value}</strong><span>{s.label}</span></div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Pain points -->
+    <section class="pain-section">
+      <div class="container">
+        <div class="section-label">Sound familiar?</div>
+        <h2>Problems we <span class="accent">solve for {ind.name.toLowerCase()}</span></h2>
+        <div class="pain-grid">
+          {ind.pain_points.map(p => (
+            <div class="pain-item">
+              <div class="pain-x">✗</div>
+              <p>{p}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Solutions -->
+    <section class="solutions-section">
+      <div class="container">
+        <div class="section-label">How We Fix It</div>
+        <h2>Everything your {ind.name.toLowerCase()}<br><span class="accent">actually needs</span></h2>
+        <div class="sol-grid">
+          {ind.solutions.map((s, i) => (
+            <div class="sol-card">
+              <div class="sol-num">0{i + 1}</div>
+              <h3>{s.title}</h3>
+              <p>{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Top Products -->
+    <section class="products-section">
+      <div class="container">
+        <div class="section-label">Product Selection</div>
+        <h2>Top-selling products at<br><span class="accent">Chicago {ind.name.toLowerCase()}</span></h2>
+        <div class="products-grid">
+          {ind.topProducts.map((p, i) => (
+            <div class="product-pill">
+              <span class="pp-rank">#{i + 1}</span>
+              <span>{p}</span>
+            </div>
+          ))}
+        </div>
+        <p class="products-note">Product mix customized to your location after a free site assessment. 200+ SKUs available.</p>
+      </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="ind-testimonial">
+      <div class="container">
+        <div class="it-inner">
+          <div class="it-quote">"</div>
+          <blockquote>{ind.testimonial.quote}</blockquote>
+          <div class="it-author">
+            <div class="it-av">
+              {ind.testimonial.author.split(' ').map((w: string) => w[0]).join('')}
+            </div>
+            <div>
+              <strong>{ind.testimonial.author}</strong>
+              <span>{ind.testimonial.role}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="ind-faq">
+      <div class="container ind-faq-grid">
+        <div>
+          <div class="section-label">FAQ</div>
+          <h2>{ind.name}<br><span class="accent">vending questions</span></h2>
+        </div>
+        <div class="faq-list">
+          {ind.faqs.map((f, i) => (
+            <div class="faq-item">
+              <button class="faq-q" aria-expanded="false" aria-controls={`ifaq-${i}`}>
+                <span>{f.q}</span>
+                <span class="faq-icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-a" id={`ifaq-${i}`} hidden>
+                <p>{f.a}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="ind-cta">
+      <div class="container ind-cta-inner">
+        <h2>Free vending for your<br><span class="accent">{ind.name.toLowerCase()}</span></h2>
+        <p>Free installation. Free service. Customized for {ind.name.toLowerCase()}. Most Chicago locations qualify in 2 minutes.</p>
+        <a href="/#quiz" class="btn-primary btn-xl">Check If You Qualify →</a>
+        <div class="ind-cta-trust">
+          <span>✓ {ind.stats[0].value} {ind.stats[0].label}</span>
+          <span>·</span>
+          <span>✓ $0 setup cost</span>
+          <span>·</span>
+          <span>✓ 4-hour service SLA</span>
+          <span>·</span>
+          <span>✓ No lock-in contract</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .ind-hero{position:relative;min-height:80vh;display:flex;align-items:center;padding:120px 0 80px;overflow:hidden}
+  .ind-hero-img{position:absolute;inset:0}
+  .ind-hero-img img{width:100%;height:100%;object-fit:cover;filter:brightness(0.25) saturate(0.6)}
+  .ind-hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(10,10,10,0.9) 0%,rgba(10,10,10,0.5) 100%)}
+  .ind-hero-content{position:relative;z-index:2;max-width:720px}
+  .breadcrumb{display:flex;gap:8px;align-items:center;font-size:13px;color:rgba(248,245,240,.4);margin-bottom:20px}
+  .breadcrumb a:hover,.breadcrumb a:focus{color:var(--c-orange)}
+  .ind-icon-badge{font-size:48px;margin-bottom:16px}
+  .ind-hero h1{font-family:var(--font-display);font-size:clamp(44px,8vw,100px);font-weight:400;line-height:1.05;margin-bottom:16px}
+  .accent{color:var(--c-orange)}
+  .ind-sub{font-size:18px;color:rgba(248,245,240,.7);max-width:520px;margin-bottom:32px;line-height:1.6}
+  .ind-hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px}
+  .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--c-orange);color:#fff;padding:16px 26px;border-radius:var(--radius);font-size:15px;font-weight:500;transition:background .2s,transform .15s;box-shadow:0 0 40px rgba(255,78,0,.3)}
+  .btn-primary:hover{background:var(--c-orange-dark);transform:translateY(-1px)}
+  .btn-primary.btn-xl{font-size:18px;padding:20px 36px}
+  .btn-ghost{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(248,245,240,.2);color:rgba(248,245,240,.8);padding:16px 22px;border-radius:var(--radius);font-size:15px}
+  .ind-stats{display:flex;gap:36px;flex-wrap:wrap}
+  .is-item{display:flex;flex-direction:column;gap:3px}
+  .is-item strong{font-size:24px;font-weight:500;color:var(--c-white)}
+  .is-item span{font-size:12px;color:rgba(248,245,240,.5)}
+
+  .section-label{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--c-orange);font-weight:500;margin-bottom:14px}
+
+  /* Pain points */
+  .pain-section{padding:80px 0;background:var(--c-near-black)}
+  .pain-section h2{font-family:var(--font-display);font-size:clamp(32px,5vw,56px);font-weight:400;margin-bottom:40px}
+  .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .pain-item{display:flex;gap:14px;background:var(--c-dark);border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:20px 22px;align-items:flex-start}
+  .pain-x{color:#f87171;font-size:18px;font-weight:700;flex-shrink:0;margin-top:1px}
+  .pain-item p{font-size:14px;color:rgba(248,245,240,.7);line-height:1.6;margin:0}
+
+  /* Solutions */
+  .solutions-section{padding:80px 0;background:var(--c-black)}
+  .solutions-section h2{font-family:var(--font-display);font-size:clamp(32px,5vw,56px);font-weight:400;margin-bottom:48px}
+  .sol-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .sol-card{background:var(--c-dark);border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:28px;transition:border-color .2s,transform .2s}
+  .sol-card:hover{border-color:rgba(255,78,0,.3);transform:translateY(-3px)}
+  .sol-num{font-family:var(--font-display);font-size:52px;color:rgba(255,78,0,.15);line-height:1;margin-bottom:14px}
+  .sol-card h3{font-size:18px;font-weight:500;margin-bottom:10px}
+  .sol-card p{font-size:14px;color:rgba(248,245,240,.65);line-height:1.65}
+
+  /* Products */
+  .products-section{padding:80px 0;background:var(--c-near-black)}
+  .products-section h2{font-family:var(--font-display);font-size:clamp(32px,5vw,56px);font-weight:400;margin-bottom:32px}
+  .products-grid{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+  .product-pill{display:flex;align-items:center;gap:8px;background:var(--c-dark);border:1px solid var(--c-border);border-radius:100px;padding:10px 16px;font-size:14px}
+  .pp-rank{font-size:11px;color:var(--c-orange);font-weight:500;font-family:var(--font-display)}
+  .products-note{font-size:13px;color:rgba(248,245,240,.4);font-style:italic}
+
+  /* Testimonial */
+  .ind-testimonial{padding:80px 0;background:var(--c-dark);border-top:1px solid var(--c-border)}
+  .it-inner{max-width:800px;margin:0 auto;text-align:center}
+  .it-quote{font-family:var(--font-display);font-size:120px;color:rgba(255,78,0,.2);line-height:0.7;margin-bottom:20px}
+  .it-inner blockquote{font-size:20px;line-height:1.7;color:rgba(248,245,240,.9);font-style:italic;margin-bottom:28px}
+  .it-author{display:flex;align-items:center;gap:14px;justify-content:center}
+  .it-av{width:44px;height:44px;border-radius:50%;background:rgba(255,78,0,.15);color:var(--c-orange);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:500;flex-shrink:0}
+  .it-author strong{display:block;font-size:15px;font-weight:500}
+  .it-author span{font-size:13px;color:rgba(248,245,240,.5)}
+
+  /* FAQ */
+  .ind-faq{padding:80px 0;background:var(--c-black)}
+  .ind-faq-grid{display:grid;grid-template-columns:300px 1fr;gap:60px;align-items:start}
+  .ind-faq h2{font-family:var(--font-display);font-size:clamp(32px,5vw,52px);font-weight:400;position:sticky;top:100px}
+  .faq-list{display:flex;flex-direction:column}
+  .faq-item{border-bottom:1px solid var(--c-border)}
+  .faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px 0;background:none;border:none;cursor:pointer;font-family:var(--font-body);font-size:16px;color:var(--c-white);text-align:left}
+  .faq-icon{font-size:20px;color:var(--c-orange);transition:transform .25s;flex-shrink:0}
+  .faq-q[aria-expanded="true"] .faq-icon{transform:rotate(45deg)}
+  .faq-a{padding:0 0 20px}
+  .faq-a p{font-size:15px;color:rgba(248,245,240,.65);line-height:1.7}
+
+  /* CTA */
+  .ind-cta{padding:100px 0;background:var(--c-near-black);border-top:1px solid var(--c-border)}
+  .ind-cta-inner{text-align:center;max-width:680px;margin:0 auto}
+  .ind-cta h2{font-family:var(--font-display);font-size:clamp(40px,7vw,80px);font-weight:400;margin-bottom:16px}
+  .ind-cta p{font-size:17px;color:rgba(248,245,240,.65);margin-bottom:36px;line-height:1.65}
+  .ind-cta-trust{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:24px;font-size:13px;color:rgba(248,245,240,.4)}
+
+  @media(max-width:900px){.pain-grid{grid-template-columns:1fr 1fr}.sol-grid{grid-template-columns:1fr 1fr}.ind-faq-grid{grid-template-columns:1fr}.ind-faq h2{position:static}}
+  @media(max-width:600px){.pain-grid{grid-template-columns:1fr}.sol-grid{grid-template-columns:1fr}.ind-stats{gap:20px}}
+</style>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', function(this: HTMLButtonElement) {
+      const expanded = this.getAttribute('aria-expanded') === 'true';
+      const id = this.getAttribute('aria-controls')!;
+      const answer = document.getElementById(id)!;
+      this.setAttribute('aria-expanded', String(!expanded));
+      answer.hidden = expanded;
+    });
+  });
+</script>

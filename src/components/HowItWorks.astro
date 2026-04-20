@@ -1,0 +1,124 @@
+---
+const steps = [
+  { n: "01", title: "Apply in 2 minutes", desc: "Fill out our quick qualifier above. Tell us your location type, size, and what you need." },
+  { n: "02", title: "Free site assessment", desc: "A Chicago-based rep visits your location within 48 hours. We map the best placement." },
+  { n: "03", title: "We install everything", desc: "Our crew delivers, installs, and programs machines. You do nothing. Zero cost to you." },
+  { n: "04", title: "We keep it running", desc: "Weekly restocking, 4-hour repair SLA, cashless payments, custom product mix—handled." },
+];
+
+const locations = [
+  { name: "The Loop", tag: "50+ locations", icon: "🏙️" },
+  { name: "River North", tag: "35+ locations", icon: "🌆" },
+  { name: "Wicker Park", tag: "20+ locations", icon: "🏘️" },
+  { name: "Lincoln Park", tag: "28+ locations", icon: "🌳" },
+  { name: "Naperville", tag: "40+ locations", icon: "🏢" },
+  { name: "Schaumburg", tag: "30+ locations", icon: "🏪" },
+  { name: "Evanston", tag: "22+ locations", icon: "🎓" },
+  { name: "Oak Park", tag: "18+ locations", icon: "🏡" },
+];
+---
+
+<section class="hiw-section" id="how-it-works">
+  <div class="container">
+    <div class="hiw-header">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title">Up and running in<br><span class="accent">under a week</span></h2>
+    </div>
+    <div class="steps-grid">
+      {steps.map((s, i) => (
+        <div class="step-card">
+          <div class="step-number">{s.n}</div>
+          <h3 class="step-title">{s.title}</h3>
+          <p class="step-desc">{s.desc}</p>
+          {i < steps.length - 1 && <div class="step-arrow" aria-hidden="true">→</div>}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="locations-section" id="locations">
+  <div class="container">
+    <div class="loc-header">
+      <div class="section-label">Coverage Map</div>
+      <h2 class="section-title">We serve all of<br><span class="accent">Chicago metro</span></h2>
+      <p class="section-sub">From the Gold Coast to Schaumburg—if you're within 50 miles of the Loop, we've got you covered.</p>
+    </div>
+    <div class="locations-grid">
+      {locations.map((loc) => (
+        <div class="loc-card">
+          <span class="loc-icon">{loc.icon}</span>
+          <div>
+            <strong class="loc-name">{loc.name}</strong>
+            <span class="loc-tag">{loc.tag}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="loc-cta">
+      <p>Don't see your neighborhood? <a href="#quiz" class="loc-cta-link">Check if we cover your area →</a></p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hiw-section {
+    padding: 100px 0;
+    background: var(--c-near-black);
+    overflow: hidden;
+  }
+  .hiw-header { margin-bottom: 60px; }
+  .steps-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; position: relative;
+  }
+  .step-card {
+    padding: 32px 28px; position: relative;
+    border-top: 1px solid var(--c-border);
+  }
+  .step-card:not(:last-child) { border-right: 1px solid var(--c-border); }
+  .step-number {
+    font-family: var(--font-display);
+    font-size: 64px; color: rgba(255,78,0,0.12);
+    line-height: 1; margin-bottom: 16px;
+  }
+  .step-title { font-size: 18px; font-weight: 500; margin-bottom: 10px; }
+  .step-desc { font-size: 14px; color: rgba(248,245,240,0.6); line-height: 1.6; }
+  .step-arrow {
+    position: absolute; top: 50%; right: -14px;
+    transform: translateY(-50%);
+    font-size: 20px; color: var(--c-orange); z-index: 2;
+    background: var(--c-near-black); padding: 4px;
+  }
+
+  /* Locations */
+  .locations-section { padding: 100px 0; }
+  .loc-header { margin-bottom: 48px; }
+  .locations-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    margin-bottom: 28px;
+  }
+  .loc-card {
+    background: var(--c-dark); border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    padding: 20px; display: flex; align-items: center; gap: 14px;
+    transition: border-color 0.2s;
+  }
+  .loc-card:hover { border-color: rgba(255,78,0,0.3); }
+  .loc-icon { font-size: 24px; }
+  .loc-name { display: block; font-size: 15px; font-weight: 500; margin-bottom: 2px; }
+  .loc-tag { font-size: 12px; color: rgba(248,245,240,0.45); }
+  .loc-cta { text-align: center; font-size: 15px; color: rgba(248,245,240,0.5); }
+  .loc-cta-link { color: var(--c-orange); }
+  .loc-cta-link:hover { text-decoration: underline; }
+
+  @media (max-width: 900px) {
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .step-arrow { display: none; }
+    .locations-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 500px) {
+    .steps-grid, .locations-grid { grid-template-columns: 1fr; }
+    .step-card:not(:last-child) { border-right: none; border-bottom: 1px solid var(--c-border); }
+  }
+</style>

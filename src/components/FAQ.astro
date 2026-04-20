@@ -1,0 +1,121 @@
+---
+const faqs = [
+  {
+    q: "Is it really free to get vending machines in Chicago?",
+    a: "Yes, 100% free. We provide, install, and maintain the machines at no cost. We earn revenue from the product sales—you get a great employee amenity with zero investment or ongoing cost.",
+  },
+  {
+    q: "How quickly can you install vending machines at my Chicago location?",
+    a: "Most installations happen within 5–7 business days after the site assessment. For urgent requests (new office openings, etc.), we can often move faster.",
+  },
+  {
+    q: "What areas around Chicago do you service?",
+    a: "We cover all of Chicago (Loop, North Side, West Side, South Side) plus suburbs including Naperville, Schaumburg, Evanston, Oak Park, Joliet, Orland Park, and everything in between—up to 50 miles from the Loop.",
+  },
+  {
+    q: "What happens when a machine breaks down?",
+    a: "Our Chicago service team responds within 4 hours, guaranteed. If we miss that SLA, your next month's service is free. We track machines remotely and often dispatch before you even notice an issue.",
+  },
+  {
+    q: "Can we customize the products in our machines?",
+    a: "Absolutely. After installation we'll survey your team's preferences and adjust the mix. Healthy options? Regional Chicago snacks? Specific brands? We accommodate all of it.",
+  },
+  {
+    q: "How many employees do we need to qualify?",
+    a: "We typically work with locations that have 25 or more daily users. Smaller locations may qualify depending on foot traffic. Use our quiz above to check your specific situation.",
+  },
+  {
+    q: "Do you offer cashless / contactless payment?",
+    a: "Every machine accepts credit/debit cards, Apple Pay, Google Pay, and our mobile app. Cash is also accepted. We're not the vending company stuck in 2005.",
+  },
+  {
+    q: "What's your contract length?",
+    a: "We offer flexible agreements—no long-term lock-in required. We earn your business every month through great service, not by trapping you in a contract.",
+  },
+];
+---
+
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title">Common questions about<br><span class="accent">Chicago vending service</span></h2>
+
+    <div class="faq-list">
+      {faqs.map((f, i) => (
+        <div class="faq-item" id={`faq-${i}`}>
+          <button class="faq-q" aria-expanded="false" aria-controls={`faq-a-${i}`}>
+            <span>{f.q}</span>
+            <span class="faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-a" id={`faq-a-${i}`} hidden>
+            <p>{f.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is it really free to get vending machines in Chicago?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, 100% free. We provide, install, and maintain the machines at no cost." }
+    },
+    {
+      "@type": "Question",
+      "name": "How quickly can you install vending machines at my Chicago location?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Most installations happen within 5–7 business days after the site assessment." }
+    },
+    {
+      "@type": "Question",
+      "name": "What areas around Chicago do you service?",
+      "acceptedAnswer": { "@type": "Answer", "text": "We cover all of Chicago plus suburbs including Naperville, Schaumburg, Evanston, Oak Park, Joliet, and more—up to 50 miles from the Loop." }
+    }
+  ]
+}
+</script>
+
+<style>
+  .faq-section { padding: 100px 0; }
+  .faq-section .section-title { margin-bottom: 48px; }
+  .faq-list { max-width: 800px; }
+  .faq-item { border-bottom: 1px solid var(--c-border); }
+  .faq-q {
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
+    gap: 20px; padding: 22px 0;
+    background: none; border: none; cursor: pointer; text-align: left;
+    font-family: var(--font-body); font-size: 17px; color: var(--c-white); font-weight: 400;
+  }
+  .faq-q:hover { color: rgba(248,245,240,0.8); }
+  .faq-icon {
+    font-size: 22px; color: var(--c-orange); flex-shrink: 0;
+    transition: transform 0.25s;
+    font-weight: 300; line-height: 1;
+  }
+  .faq-q[aria-expanded="true"] .faq-icon { transform: rotate(45deg); }
+  .faq-a { padding: 0 0 20px; }
+  .faq-a p { font-size: 15px; color: rgba(248,245,240,0.65); line-height: 1.7; }
+</style>
+
+<script>
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      const answerId = btn.getAttribute('aria-controls')!;
+      const answer = document.getElementById(answerId)!;
+
+      btn.setAttribute('aria-expanded', String(!expanded));
+      if (expanded) {
+        answer.hidden = true;
+      } else {
+        answer.hidden = false;
+      }
+    });
+  });
+</script>

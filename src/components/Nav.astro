@@ -1,0 +1,107 @@
+---
+---
+<header class="nav-wrap">
+  <nav class="container nav-inner">
+    <a href="/" class="logo">
+      <span class="logo-icon">◈</span>
+      <span class="logo-text">Chicago<strong>Vending</strong></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#industries">Industries</a></li>
+      <li><a href="/#locations">Locations</a></li>
+      <li><a href="/#compare">Why Us</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+    <a href="#quiz" class="nav-cta">Get Free Quote →</a>
+    <button class="nav-mobile-btn" aria-label="Open menu" id="mobileMenuBtn">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="/#services" class="mm-link">Services</a>
+    <a href="/#industries" class="mm-link">Industries</a>
+    <a href="/#locations" class="mm-link">Locations</a>
+    <a href="/blog" class="mm-link">Blog</a>
+    <a href="/about" class="mm-link">About</a>
+    <a href="/contact" class="mm-link">Contact</a>
+    <a href="/#quiz" class="mm-cta">Get Free Quote →</a>
+  </div>
+</header>
+
+<style>
+  .nav-wrap {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--c-border);
+  }
+  .nav-inner {
+    display: flex; align-items: center; gap: 40px;
+    height: 68px;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-body); font-size: 17px; letter-spacing: -0.3px;
+    color: var(--c-white);
+  }
+  .logo-icon { color: var(--c-orange); font-size: 20px; }
+  .logo strong { color: var(--c-orange); font-weight: 500; }
+  .nav-links {
+    display: flex; gap: 32px; list-style: none; margin-left: auto;
+  }
+  .nav-links a {
+    font-size: 14px; color: rgba(248,245,240,0.7);
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--c-white); }
+  .nav-cta {
+    background: var(--c-orange); color: #fff;
+    padding: 10px 20px; border-radius: var(--radius);
+    font-size: 14px; font-weight: 500;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--c-orange-dark); transform: translateY(-1px); }
+  .nav-mobile-btn {
+    display: none; background: none; border: none;
+    cursor: pointer; padding: 8px; gap: 5px;
+    flex-direction: column; align-items: flex-end;
+    margin-left: auto;
+  }
+  .nav-mobile-btn span {
+    display: block; height: 2px; background: var(--c-white);
+    border-radius: 2px; transition: 0.2s;
+  }
+  .nav-mobile-btn span:nth-child(1) { width: 24px; }
+  .nav-mobile-btn span:nth-child(2) { width: 18px; }
+  .nav-mobile-btn span:nth-child(3) { width: 24px; }
+  .mobile-menu {
+    display: none; flex-direction: column;
+    padding: 16px 24px 20px;
+    border-top: 1px solid var(--c-border);
+  }
+  .mobile-menu.open { display: flex; }
+  .mm-link {
+    padding: 14px 0; font-size: 16px;
+    border-bottom: 1px solid var(--c-border);
+    color: rgba(248,245,240,0.8);
+  }
+  .mm-cta {
+    margin-top: 16px; background: var(--c-orange); color: #fff;
+    padding: 14px 20px; border-radius: var(--radius);
+    font-size: 15px; font-weight: 500; text-align: center;
+  }
+  @media (max-width: 900px) {
+    .nav-links, .nav-cta { display: none; }
+    .nav-mobile-btn { display: flex; }
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('mobileMenuBtn');
+  const menu = document.getElementById('mobileMenu');
+  btn?.addEventListener('click', () => menu?.classList.toggle('open'));
+  menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+</script>
